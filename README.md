@@ -41,12 +41,12 @@ Each service includes:
 - Form validation with inline error messages and disabled buttons for invalid forms
 
 ## Bonus Features
-- 🔍 Search and filter by category, price, or rating
-- 💾 Offline support using SharedPreferences
-- ⏳ Pagination/lazy loading
-- 🎭 Hero animations between list and detail pages
-- 🌍 Multi-language support with GetX i18n
-- 🔐 Basic login simulation
+- Search and filter by category, price, or rating
+- Offline support using SharedPreferences
+- Pagination/lazy loading
+- Hero animations between list and detail pages
+- Multi-language support with GetX i18n
+- Basic login simulation
 
 ## Folder Structure
 
