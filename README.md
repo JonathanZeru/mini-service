@@ -51,19 +51,35 @@ Each service includes:
 ## Folder Structure
 
 lib/
+
 ├── data/
+
 │   ├── datasources/
+
 │   └── repositories/
+
 ├── domain/
+
 │   ├── entities/
+
 │   ├── repositories/
+
 │   └── usecases/
+
 ├── presentation/
+
 │   ├── bindings/
+
 │   ├── controllers/
+
 │   ├── pages/
+
 │   └── widgets/
+
 ├── core/
+
 │   ├── constants/
+
 │   └── utils/
+
 └── main.dart
