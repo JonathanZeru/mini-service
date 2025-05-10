@@ -50,7 +50,7 @@ class ServicesRepositoryImpl implements ServicesRepository {
       final response = await apiProvider.get('$endpoint$queryString');
       final List<dynamic> servicesJson = response.body as List;
       final List<ServiceModel> services = servicesJson
-          .map((serviceJson) => ServiceModel.fromJson(serviceJson.body as Map<String, dynamic>))
+          .map((serviceJson) => ServiceModel.fromJson(serviceJson as Map<String, dynamic>))
           .toList();
       return Right(services);
     } on ServerException catch (e) {
