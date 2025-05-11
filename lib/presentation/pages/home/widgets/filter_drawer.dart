@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:service_booking_app/core/theme/app_theme.dart';
 import 'package:service_booking_app/presentation/controllers/home_controller.dart';
+import 'package:service_booking_app/presentation/widgets/custom_button.dart';
 
 class FilterDrawer extends StatelessWidget {
   final HomeController controller;
@@ -19,19 +21,27 @@ class FilterDrawer extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              // Header
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Filters',
-                    style: Theme.of(context).textTheme.titleLarge,
+                    'filters'.tr,
+                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: AppTheme.primaryColor,
+                    ),
                   ),
-                  TextButton(
+                  TextButton.icon(
                     onPressed: () {
                       controller.resetFilters();
                       Navigator.pop(context);
                     },
-                    child: const Text('Reset All'),
+                    icon: const Icon(Icons.refresh),
+                    label: Text('reset_filters'.tr),
+                    style: TextButton.styleFrom(
+                      foregroundColor: Colors.red,
+                    ),
                   ),
                 ],
               ),
@@ -40,8 +50,10 @@ class FilterDrawer extends StatelessWidget {
               
               // Price Range
               Text(
-                'Price Range',
-                style: Theme.of(context).textTheme.titleMedium,
+                'price_range'.tr,
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               const SizedBox(height: 8),
               Obx(() => RangeSlider(
@@ -56,6 +68,8 @@ class FilterDrawer extends StatelessWidget {
                   '\$${controller.selectedMinPrice.value.toStringAsFixed(0)}',
                   '\$${controller.selectedMaxPrice.value.toStringAsFixed(0)}',
                 ),
+                activeColor: AppTheme.primaryColor,
+                inactiveColor: AppTheme.primaryColor.withOpacity(0.2),
                 onChanged: (values) {
                   controller.updatePriceRange(values.start, values.end);
                 },
@@ -74,8 +88,10 @@ class FilterDrawer extends StatelessWidget {
               
               // Rating
               Text(
-                'Minimum Rating',
-                style: Theme.of(context).textTheme.titleMedium,
+                'min_rating'.tr,
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               const SizedBox(height: 8),
               Obx(() => Slider(
@@ -84,6 +100,8 @@ class FilterDrawer extends StatelessWidget {
                 divisions: 10,
                 value: controller.selectedRating.value,
                 label: controller.selectedRating.value.toStringAsFixed(1),
+                activeColor: AppTheme.primaryColor,
+                inactiveColor: AppTheme.primaryColor.withOpacity(0.2),
                 onChanged: (value) {
                   controller.updateRatingFilter(value);
                 },
@@ -108,29 +126,30 @@ class FilterDrawer extends StatelessWidget {
               
               // Availability
               Text(
-                'Availability',
-                style: Theme.of(context).textTheme.titleMedium,
+                'availability'.tr,
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               const SizedBox(height: 8),
               Obx(() => SwitchListTile(
-                title: const Text('Show Available Only'),
+                title: Text('available_only'.tr),
                 value: controller.filterAvailableOnly.value,
                 onChanged: (value) {
                   controller.updateAvailabilityFilter(value);
                 },
+                activeColor: AppTheme.primaryColor,
               )),
+              
               const Spacer(),
-              SizedBox(
+              
+              // Apply button
+              CustomButton(
+                text: 'apply_filters'.tr,
+                onPressed: () {
+                  Navigator.pop(context);
+                },
                 width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: const Padding(
-                    padding: EdgeInsets.all(12.0),
-                    child: Text('Apply Filters'),
-                  ),
-                ),
               ),
             ],
           ),

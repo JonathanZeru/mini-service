@@ -2,35 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class UIHelpers {
-  static void showLoading({String message = 'Loading...'}) {
-    Get.dialog(
-      Dialog(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const CircularProgressIndicator(),
-              const SizedBox(height: 16),
-              Text(message),
-            ],
-          ),
-        ),
-      ),
-      barrierDismissible: false,
-    );
-  }
-
-  static void hideLoading() {
-    if (Get.isDialogOpen ?? false) {
-      Get.back();
-    }
-  }
-
   static void showSnackbar({
     required String title,
     required String message,
-    bool isError = false,
+    required bool isError,
   }) {
     Get.snackbar(
       title,
@@ -40,14 +15,17 @@ class UIHelpers {
       colorText: isError ? Colors.red[900] : Colors.green[900],
       margin: const EdgeInsets.all(16),
       duration: const Duration(seconds: 3),
+      borderRadius: 8,
+      isDismissible: true,
+      dismissDirection: DismissDirection.horizontal,
     );
   }
 
   static void showConfirmationDialog({
     required String title,
     required String message,
-    required Function onConfirm,
-    String confirmText = 'Confirm',
+    required String confirmText,
+    required VoidCallback onConfirm,
     String cancelText = 'Cancel',
   }) {
     Get.dialog(
@@ -64,7 +42,12 @@ class UIHelpers {
               Get.back();
               onConfirm();
             },
-            child: Text(confirmText),
+            child: Text(
+              confirmText,
+              style: TextStyle(
+                color: confirmText.toLowerCase() == 'delete' ? Colors.red : null,
+              ),
+            ),
           ),
         ],
       ),

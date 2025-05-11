@@ -10,6 +10,8 @@ abstract class ServicesRepository {
     bool? availability,
     int? duration,
     double? rating,
+    int? page,
+    int? limit,
   });
   Future<Either<Failure, ServiceModel>> getService(String id);
   Future<Either<Failure, ServiceModel>> createService(ServiceModel service, File? imageFile);

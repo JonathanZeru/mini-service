@@ -3,6 +3,7 @@ import 'package:service_booking_app/core/utils/ui_helpers.dart';
 import 'package:service_booking_app/data/models/service_model.dart';
 import 'package:service_booking_app/domain/usecases/delete_service.dart';
 import 'package:service_booking_app/domain/usecases/get_service.dart';
+import 'package:service_booking_app/presentation/controllers/home_controller.dart';
 import 'package:service_booking_app/presentation/routes/app_routes.dart';
 
 class ServiceController extends GetxController {
@@ -80,7 +81,14 @@ class ServiceController extends GetxController {
           message: 'Service deleted successfully',
           isError: false,
         );
-        Get.back(); // Go back to home
+          try {
+            final homeController = Get.find<HomeController>();
+            homeController.fetchServices().then((_) {
+              Get.until((route) => route.settings.name == Routes.home);
+            });
+          } catch (e) {
+            Get.until((route) => route.settings.name == Routes.home);
+          }
       },
     );
     isDeleting.value = false;

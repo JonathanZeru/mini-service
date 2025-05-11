@@ -5,6 +5,8 @@ import 'package:service_booking_app/data/models/category_model.dart';
 import 'package:service_booking_app/domain/usecases/create_category.dart';
 import 'package:service_booking_app/domain/usecases/get_category.dart';
 import 'package:service_booking_app/domain/usecases/update_category.dart';
+import 'package:service_booking_app/presentation/controllers/home_controller.dart';
+import 'package:service_booking_app/presentation/routes/app_routes.dart';
 
 class CategoryFormController extends GetxController {
   final CreateCategory createCategory;
@@ -23,6 +25,10 @@ class CategoryFormController extends GetxController {
   
   final RxBool isLoading = false.obs;
   final RxBool isSaving = false.obs;
+  
+  // Add this for form validation tracking
+  final RxBool _isFormValid = false.obs;
+  bool get isFormValid => _isFormValid.value;
 
   String? categoryId;
   bool get isEditing => categoryId != null;
@@ -34,6 +40,21 @@ class CategoryFormController extends GetxController {
       categoryId = Get.arguments as String;
       loadCategory();
     }
+    
+    // Add listeners to text controllers
+    nameController.addListener(checkFormValidity);
+    descriptionController.addListener(checkFormValidity);
+  }
+
+  // Add this method to validate the form
+  void validateForm() {
+    final formValid = formKey.currentState?.validate() ?? false;
+    _isFormValid.value = formValid;
+  }
+
+  // Call this method whenever form fields change
+  void checkFormValidity() {
+    validateForm();
   }
 
   Future<void> loadCategory() async {
@@ -52,6 +73,8 @@ class CategoryFormController extends GetxController {
       (data) {
         nameController.text = data.name;
         descriptionController.text = data.description;
+        // Check form validity after loading data
+        checkFormValidity();
       },
     );
     isLoading.value = false;
@@ -64,61 +87,68 @@ class CategoryFormController extends GetxController {
     return null;
   }
 
-Future<void> saveCategory() async {
-  if (formKey.currentState?.validate() ?? false) {
-    isSaving.value = true;
-    
-    // Make sure the CategoryModel constructor matches your model definition
-    // Removed createdAt if it's not part of your model
-    final category = CategoryModel(
-      id: categoryId,
-      name: nameController.text.trim(),
-      description: descriptionController.text.trim(),
-      createdAt: DateTime.now()
-    );
-
-    try {
-      final result = isEditing
-          ? await updateCategory(categoryId!, category)
-          : await createCategory(category);
+  Future<void> saveCategory() async {
+    if (formKey.currentState?.validate() ?? false) {
+      isSaving.value = true;
       
-      result.fold(
-        (failure) {
-          // Show error message
-          UIHelpers.showSnackbar(
-            title: 'Error',
-            message: failure.message,
-            isError: true,
-          );
-        },
-        (successCategory) { 
-          // Show success message
-          UIHelpers.showSnackbar(
-            title: 'Success',
-            message: isEditing
-                ? 'Category updated successfully'
-                : 'Category created successfully',
-            isError: false,
-          );
-          
-          // Navigate back with the created/updated category
-          Get.back(result: true);
-        },
+      final category = CategoryModel(
+        id: categoryId,
+        name: nameController.text.trim(),
+        description: descriptionController.text.trim(),
+        createdAt: DateTime.now(),
       );
-    } catch (e) {
-      // Handle any unexpected errors
-      UIHelpers.showSnackbar(
-        title: 'Error',
-        message: 'An unexpected error occurred: ${e.toString()}',
-        isError: true,
-      );
-    } finally {
-      isSaving.value = false;
+
+      try {
+        final result = isEditing
+            ? await updateCategory(categoryId!, category)
+            : await createCategory(category);
+
+        result.fold(
+          (failure) {
+            UIHelpers.showSnackbar(
+              title: 'Error',
+              message: failure.message,
+              isError: true,
+            );
+            print('Error saving category: ${failure.message}');
+          },
+          (successCategory) {
+            UIHelpers.showSnackbar(
+              title: 'Success',
+              message: isEditing 
+                  ? 'Category updated successfully' 
+                  : 'Category created successfully',
+              isError: false,
+            );
+            try {
+              final homeController = Get.find<HomeController>();
+              homeController.fetchCategories().then((_) {
+                Get.until((route) => route.settings.name == Routes.home);
+              });
+            } catch (e) {
+              Get.until((route) => route.settings.name == Routes.home);
+            }
+          },
+        );
+      } catch (e) {
+        UIHelpers.showSnackbar(
+          title: 'Error',
+          message: 'An unexpected error occurred: ${e.toString()}',
+          isError: true,
+        );
+        print('Unexpected error: $e');
+      } finally {
+        isSaving.value = false;
+      }
     }
   }
-}
+
   @override
   void onClose() {
+    // Remove listeners to prevent memory leaks
+    nameController.removeListener(checkFormValidity);
+    descriptionController.removeListener(checkFormValidity);
+    
     nameController.dispose();
     descriptionController.dispose();
     super.onClose();

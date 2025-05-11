@@ -5,6 +5,7 @@ import 'package:service_booking_app/data/repositories/categories_repository_impl
 import 'package:service_booking_app/domain/repositories/categories_repository.dart';
 import 'package:service_booking_app/domain/usecases/delete_category.dart';
 import 'package:service_booking_app/domain/usecases/get_categories.dart';
+import 'package:service_booking_app/presentation/controllers/auth_controller.dart';
 import 'package:service_booking_app/presentation/controllers/categories_controller.dart';
 
 class CategoriesBinding extends Bindings {
@@ -25,10 +26,14 @@ class CategoriesBinding extends Bindings {
     Get.lazyPut(() => GetCategories(Get.find<CategoriesRepository>()));
     Get.lazyPut(() => DeleteCategory(Get.find<CategoriesRepository>()));
     
+    // Make sure AuthController is available
+    Get.find<AuthController>();
+    
     Get.lazyPut(
       () => CategoriesController(
         getCategories: Get.find<GetCategories>(),
         deleteCategory: Get.find<DeleteCategory>(),
+        authController: Get.find<AuthController>(),
       ),
     );
   }

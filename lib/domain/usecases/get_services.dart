@@ -14,6 +14,8 @@ class GetServices {
     bool? availability,
     int? duration,
     double? rating,
+    int? page,
+    int? limit,
   }) async {
     return await repository.getServices(
       categoryId: categoryId,
@@ -21,6 +23,8 @@ class GetServices {
       availability: availability,
       duration: duration,
       rating: rating,
+      page: page,
+      limit: limit,
     );
   }
 }

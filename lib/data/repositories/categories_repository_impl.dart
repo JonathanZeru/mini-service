@@ -15,9 +15,18 @@ class CategoriesRepositoryImpl implements CategoriesRepository {
   });
 
   @override
-  Future<Either<Failure, List<CategoryModel>>> getCategories() async {
+  Future<Either<Failure, List<CategoryModel>>> getCategories({int? page, int? limit}) async {
     try {
-      final response = await apiProvider.get(endpoint);
+      // Build query parameters for pagination
+      String queryString = '';
+      if (page != null || limit != null) {
+        queryString = '?';
+        if (page != null) queryString += 'page=$page&';
+        if (limit != null) queryString += 'limit=$limit&';
+        queryString = queryString.substring(0, queryString.length - 1); // Remove trailing &
+      }
+
+      final response = await apiProvider.get('$endpoint$queryString');
       final List<dynamic> categoriesJson = response.body as List;
       final List<CategoryModel> categories = categoriesJson
           .map((categoryJson) => CategoryModel.fromJson(categoryJson as Map<String, dynamic>))

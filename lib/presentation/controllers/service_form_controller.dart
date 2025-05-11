@@ -9,6 +9,8 @@ import 'package:service_booking_app/domain/usecases/create_service.dart';
 import 'package:service_booking_app/domain/usecases/get_categories.dart';
 import 'package:service_booking_app/domain/usecases/get_service.dart';
 import 'package:service_booking_app/domain/usecases/update_service.dart';
+import 'package:service_booking_app/presentation/controllers/home_controller.dart';
+import 'package:service_booking_app/presentation/routes/app_routes.dart';
 
 class ServiceFormController extends GetxController {
   final CreateService createService;
@@ -39,16 +41,94 @@ class ServiceFormController extends GetxController {
 
   String? serviceId;
   bool get isEditing => serviceId != null;
+// Add these to your ServiceFormController
+// final RxBool _isFormValid = false.obs;
+// bool get isFormValid => _isFormValid.value;
+// Add these properties to your ServiceFormController class
+final RxBool _isFormValid = false.obs;
+bool get isFormValid => _isFormValid.value;
 
-  @override
-  void onInit() {
-    super.onInit();
-    fetchCategories();
-    if (Get.arguments != null) {
-      serviceId = Get.arguments as String;
-      loadService();
-    }
+// Add this method to validate the entire form
+void validateForm() {
+  final formValid = formKey.currentState?.validate() ?? false;
+  final categoryValid = selectedCategory.value != null;
+  final imageValid = imageFile.value != null || imageUrl.value.isNotEmpty;
+  _isFormValid.value = formValid && categoryValid && imageValid;
+}
+
+// Call this method whenever form fields change
+void checkFormValidity() {
+  validateForm();
+}
+
+@override
+void onInit() {
+  super.onInit();
+  fetchCategories();
+  if (Get.arguments != null) {
+    serviceId = Get.arguments as String;
+    loadService();
   }
+  
+  // Add listeners to all text controllers
+  nameController.addListener(checkFormValidity);
+  priceController.addListener(checkFormValidity);
+  durationController.addListener(checkFormValidity);
+  ratingController.addListener(checkFormValidity);
+  
+  // Add reaction to category and image changes
+  ever(selectedCategory, (_) => checkFormValidity());
+  ever(imageFile, (_) => checkFormValidity());
+  ever(imageUrl, (_) => checkFormValidity());
+}
+
+@override
+void onClose() {
+  // Remove listeners to prevent memory leaks
+  nameController.removeListener(checkFormValidity);
+  priceController.removeListener(checkFormValidity);
+  durationController.removeListener(checkFormValidity);
+  ratingController.removeListener(checkFormValidity);
+  
+  nameController.dispose();
+  priceController.dispose();
+  durationController.dispose();
+  ratingController.dispose();
+  super.onClose();
+}
+
+
+// void validateForm() {
+//   final formValid = formKey.currentState?.validate() ?? false;
+//   final categoryValid = selectedCategory.value != null;
+//   final imageValid = imageFile.value != null || imageUrl.value.isNotEmpty;
+//   _isFormValid.value = formValid && categoryValid && imageValid;
+// }
+
+// Call this method whenever form fields change
+// void checkFormValidity() {
+//   validateForm();
+// }
+//   @override
+//   void onInit() {
+//     super.onInit();
+//     fetchCategories();
+//     if (Get.arguments != null) {
+//       serviceId = Get.arguments as String;
+//       loadService();
+//     }
+//     // Add listeners to all text controllers
+//   nameController.addListener(checkFormValidity);
+//   priceController.addListener(checkFormValidity);
+//   durationController.addListener(checkFormValidity);
+//   ratingController.addListener(checkFormValidity);
+  
+//   // Add reaction to category and image changes
+//   ever(selectedCategory, (_) => checkFormValidity());
+//   ever(imageFile, (_) => checkFormValidity());
+//   ever(imageUrl, (_) => checkFormValidity());
+//   }
+
 
   Future<void> fetchCategories() async {
     isLoading.value = true;
@@ -87,7 +167,7 @@ class ServiceFormController extends GetxController {
         durationController.text = data.duration.toString();
         ratingController.text = data.rating.toString();
         availability.value = data.availability;
-        imageUrl.value = data.imageUrl!;
+        imageUrl.value = data.imageUrl ?? '';
         
         // Find and set the selected category
         final category = categories.firstWhereOrNull((c) => c.id == data.categoryId);
@@ -238,7 +318,8 @@ class ServiceFormController extends GetxController {
         imageUrl: imageUrl.value, // This will be updated if a new image is uploaded
         availability: availability.value,
         duration: int.parse(durationController.text.trim()),
-        rating: double.parse(ratingController.text.trim()), createdAt: DateTime.now(),
+        rating: double.parse(ratingController.text.trim()),
+        createdAt: DateTime.now(),
       );
 
       final result = isEditing
@@ -261,7 +342,15 @@ class ServiceFormController extends GetxController {
                 : 'Service created successfully',
             isError: false,
           );
-          Get.back(result: true); // Return success to previous screen
+          
+          try {
+            final homeController = Get.find<HomeController>();
+            homeController.fetchServices().then((_) {
+              Get.until((route) => route.settings.name == Routes.home);
+            });
+          } catch (e) {
+            Get.until((route) => route.settings.name == Routes.home);
+          }
         },
       );
       
@@ -269,12 +358,17 @@ class ServiceFormController extends GetxController {
     }
   }
 
-  @override
-  void onClose() {
-    nameController.dispose();
-    priceController.dispose();
-    durationController.dispose();
-    ratingController.dispose();
-    super.onClose();
-  }
+  // @override
+  // void onClose() {
+  //   nameController.removeListener(checkFormValidity);
+  // priceController.removeListener(checkFormValidity);
+  // durationController.removeListener(checkFormValidity);
+  // ratingController.removeListener(checkFormValidity);
+  // nameController.dispose();
+  // priceController.dispose();
+  // durationController.dispose();
+  // ratingController.dispose();
+  // super.onClose();
+
+  // }
 }

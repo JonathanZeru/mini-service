@@ -27,6 +27,8 @@ class ServicesRepositoryImpl implements ServicesRepository {
     bool? availability,
     int? duration,
     double? rating,
+    int? page,
+    int? limit,
   }) async {
     try {
       // Build query parameters
@@ -36,6 +38,10 @@ class ServicesRepositoryImpl implements ServicesRepository {
       if (availability != null) queryParams['availability'] = availability.toString();
       if (duration != null) queryParams['duration'] = duration.toString();
       if (rating != null) queryParams['rating'] = rating.toString();
+      
+      // Add pagination parameters
+      if (page != null) queryParams['page'] = page.toString();
+      if (limit != null) queryParams['limit'] = limit.toString();
 
       // Construct query string
       String queryString = '';
@@ -166,7 +172,6 @@ class ServicesRepositoryImpl implements ServicesRepository {
   }
 
   // Helper method to upload image to a hosting service
-  // In a real app, you would upload to your own server or a service like Firebase Storage
   Future<String> _uploadImage(File imageFile) async {
     try {
       // For demo purposes, we'll use a multipart request to upload to ImgBB or similar service
@@ -179,29 +184,6 @@ class ServicesRepositoryImpl implements ServicesRepository {
       // For demonstration purposes, we'll just return a placeholder URL
       // In a real app, you would get the URL from the upload response
       return 'https://via.placeholder.com/300';
-      
-      // Example of how you might implement actual image upload:
-      /*
-      var request = http.MultipartRequest('POST', Uri.parse('https://api.imgbb.com/1/upload'));
-      request.fields['key'] = 'YOUR_API_KEY';
-      
-      var multipartFile = await http.MultipartFile.fromPath(
-        'image', 
-        imageFile.path,
-        contentType: MediaType('image', extension(imageFile.path).substring(1)),
-      );
-      
-      request.files.add(multipartFile);
-      var response = await request.send();
-      
-      if (response.statusCode == 200) {
-        var responseData = await response.stream.bytesToString();
-        var jsonResponse = json.decode(responseData);
-        return jsonResponse['data']['url'];
-      } else {
-        throw ServerException(message: 'Failed to upload image');
-      }
-      */
     } catch (e) {
       throw ServerException(message: 'Failed to upload image: ${e.toString()}');
     }
