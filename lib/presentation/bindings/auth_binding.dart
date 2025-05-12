@@ -12,18 +12,15 @@ class AuthBinding extends Bindings {
   @override
   void dependencies() {
     // Auth repository
-    Get.lazyPut<AuthRepository>(
-      () => AuthRepositoryImpl(),
-      fenix: true,
-    );
-    
+    Get.lazyPut<AuthRepository>(() => AuthRepositoryImpl(), fenix: true);
+
     // Auth use cases
     Get.lazyPut(() => Login(Get.find<AuthRepository>()), fenix: true);
     Get.lazyPut(() => Register(Get.find<AuthRepository>()), fenix: true);
     Get.lazyPut(() => Logout(Get.find<AuthRepository>()), fenix: true);
     Get.lazyPut(() => GetCurrentUser(Get.find<AuthRepository>()), fenix: true);
     Get.lazyPut(() => IsLoggedIn(Get.find<AuthRepository>()), fenix: true);
-    
+
     Get.put(
       AuthController(
         login: Get.find<Login>(),
@@ -32,7 +29,7 @@ class AuthBinding extends Bindings {
         getCurrentUser: Get.find<GetCurrentUser>(),
         isLoggedIn: Get.find<IsLoggedIn>(),
       ),
-      permanent: true, 
+      permanent: true,
     );
   }
 }

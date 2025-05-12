@@ -14,7 +14,7 @@ class CategoryFormBinding extends Bindings {
     if (!Get.isRegistered<ApiProvider>()) {
       Get.lazyPut(() => ApiProvider(baseUrl: Constants.apiBaseUrl));
     }
-    
+
     if (!Get.isRegistered<CategoriesRepository>()) {
       Get.lazyPut<CategoriesRepository>(
         () => CategoriesRepositoryImpl(
@@ -23,11 +23,11 @@ class CategoryFormBinding extends Bindings {
         ),
       );
     }
-    
+
     Get.lazyPut(() => CreateCategory(Get.find<CategoriesRepository>()));
     Get.lazyPut(() => UpdateCategory(Get.find<CategoriesRepository>()));
     Get.lazyPut(() => GetCategory(Get.find<CategoriesRepository>()));
-    
+
     Get.lazyPut(
       () => CategoryFormController(
         createCategory: Get.find<CreateCategory>(),

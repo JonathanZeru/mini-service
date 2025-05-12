@@ -9,10 +9,7 @@ import 'package:service_booking_app/presentation/widgets/loading_indicator.dart'
 class CategoryServicesList extends StatelessWidget {
   final CategoryController controller;
 
-  const CategoryServicesList({
-    super.key,
-    required this.controller,
-  });
+  const CategoryServicesList({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -25,11 +22,11 @@ class CategoryServicesList extends StatelessWidget {
           ),
         );
       }
-      
+
       if (controller.categoryServices.isEmpty) {
         return _buildEmptyState(context);
       }
-      
+
       return AnimationLimiter(
         child: ListView.builder(
           shrinkWrap: true,
@@ -49,11 +46,7 @@ class CategoryServicesList extends StatelessWidget {
         padding: const EdgeInsets.all(32.0),
         child: Column(
           children: [
-            Icon(
-              Icons.search_off,
-              size: 64,
-              color: Colors.grey[400],
-            ),
+            Icon(Icons.search_off, size: 64, color: Colors.grey[400]),
             const SizedBox(height: 16),
             Text(
               'no_services_in_category'.tr,
@@ -76,7 +69,7 @@ class CategoryServicesList extends StatelessWidget {
   Widget _buildServiceItem(int index) {
     final service = controller.categoryServices[index];
     final categoryName = controller.category.value?.name ?? '';
-    
+
     return AnimationConfiguration.staggeredList(
       position: index,
       duration: const Duration(milliseconds: 375),

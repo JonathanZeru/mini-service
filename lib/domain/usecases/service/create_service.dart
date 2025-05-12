@@ -9,7 +9,10 @@ class CreateService {
 
   CreateService(this.repository);
 
-  Future<Either<Failure, ServiceModel>> call(ServiceModel service, {File? imageFile}) async {
+  Future<Either<Failure, ServiceModel>> call(
+    ServiceModel service, {
+    File? imageFile,
+  }) async {
     return await repository.createService(service, imageFile);
   }
 }

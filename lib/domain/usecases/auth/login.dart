@@ -8,7 +8,10 @@ class Login {
 
   Login(this.repository);
 
-  Future<Either<Failure, UserModel>> call(String username, String password) async {
+  Future<Either<Failure, UserModel>> call(
+    String username,
+    String password,
+  ) async {
     return await repository.login(username, password);
   }
 }

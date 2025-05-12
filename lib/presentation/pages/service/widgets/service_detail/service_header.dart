@@ -19,7 +19,7 @@ class ServiceHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
-    
+
     return SliverAppBar(
       expandedHeight: 250,
       pinned: true,
@@ -29,36 +29,35 @@ class ServiceHeader extends StatelessWidget {
           child: CachedNetworkImage(
             imageUrl: service.imageUrl ?? "",
             fit: BoxFit.cover,
-            placeholder: (context, url) => Shimmer.fromColors(
-              baseColor: isDarkMode ? Colors.grey[800]! : Colors.grey[300]!,
-              highlightColor: isDarkMode ? Colors.grey[700]! : Colors.grey[100]!,
-              child: Container(
-                color: Colors.white,
-              ),
-            ),
-            errorWidget: (context, url, error) => Container(
-              color: isDarkMode ? Colors.grey[800] : Colors.grey[200],
-              child: const Center(
-                child: Icon(Icons.image_not_supported, size: 40),
-              ),
-            ),
+            placeholder:
+                (context, url) => Shimmer.fromColors(
+                  baseColor: isDarkMode ? Colors.grey[800]! : Colors.grey[300]!,
+                  highlightColor:
+                      isDarkMode ? Colors.grey[700]! : Colors.grey[100]!,
+                  child: Container(color: Colors.white),
+                ),
+            errorWidget:
+                (context, url, error) => Container(
+                  color: isDarkMode ? Colors.grey[800] : Colors.grey[200],
+                  child: const Center(
+                    child: Icon(Icons.image_not_supported, size: 40),
+                  ),
+                ),
           ),
         ),
       ),
-      actions:  [
-              IconButton(
-                icon: const Icon(Icons.edit,
-            color: AppTheme.primaryColor),
-                onPressed: controller.goToEditService,
-                tooltip: 'edit'.tr,
-              ),
-              IconButton(
-                icon: const Icon(Icons.delete,
-            color: AppTheme.primaryColor),
-                onPressed: controller.confirmDelete,
-                tooltip: 'delete'.tr,
-              ),
-            ]
+      actions: [
+        IconButton(
+          icon: const Icon(Icons.edit, color: AppTheme.primaryColor),
+          onPressed: controller.goToEditService,
+          tooltip: 'edit'.tr,
+        ),
+        IconButton(
+          icon: const Icon(Icons.delete, color: AppTheme.primaryColor),
+          onPressed: controller.confirmDelete,
+          tooltip: 'delete'.tr,
+        ),
+      ],
     );
   }
 }

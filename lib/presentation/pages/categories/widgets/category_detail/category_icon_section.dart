@@ -14,11 +14,7 @@ class CategoryIconSection extends StatelessWidget {
           color: AppTheme.primaryColor.withOpacity(0.2),
           borderRadius: BorderRadius.circular(20),
         ),
-        child: Icon(
-          Icons.category,
-          size: 50,
-          color: AppTheme.primaryColor,
-        ),
+        child: Icon(Icons.category, size: 50, color: AppTheme.primaryColor),
       ),
     );
   }

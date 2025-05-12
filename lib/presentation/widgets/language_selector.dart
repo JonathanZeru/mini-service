@@ -5,10 +5,7 @@ import 'package:service_booking_app/presentation/controllers/language_controller
 class LanguageSelector extends StatelessWidget {
   final Color? iconColor;
 
-  const LanguageSelector({
-    super.key,
-    this.iconColor,
-  });
+  const LanguageSelector({super.key, this.iconColor});
 
   @override
   Widget build(BuildContext context) {
@@ -26,11 +23,13 @@ class LanguageSelector extends StatelessWidget {
             value: language['code'],
             child: Row(
               children: [
-                Obx(() => Radio<String>(
-                  value: language['code']!,
-                  groupValue: languageController.currentLanguage.value,
-                  onChanged: null,
-                )),
+                Obx(
+                  () => Radio<String>(
+                    value: language['code']!,
+                    groupValue: languageController.currentLanguage.value,
+                    onChanged: null,
+                  ),
+                ),
                 const SizedBox(width: 8),
                 Text(language['name']!),
               ],

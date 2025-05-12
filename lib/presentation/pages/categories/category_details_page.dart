@@ -12,31 +12,33 @@ class CategoryDetailsPage extends GetView<CategoryController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: _buildAppBar(),
-      body: _buildBody(),
-    );
+    return Scaffold(appBar: _buildAppBar(), body: _buildBody());
   }
 
   AppBar _buildAppBar() {
     return AppBar(
-      title: Obx(() => controller.isLoading.value ? const Text('') :  Text(controller.category.value!.name ?? '')),
+      title: Obx(
+        () =>
+            controller.isLoading.value
+                ? const Text('')
+                : Text(controller.category.value!.name ?? ''),
+      ),
       actions: [
         IconButton(
           icon: const Icon(Icons.refresh),
           onPressed: controller.refreshCategory,
           tooltip: 'refresh'.tr,
         ),
-       IconButton(
-                icon: const Icon(Icons.edit),
-                onPressed: controller.goToEditCategory,
-                tooltip: 'edit'.tr,
-              ),
         IconButton(
-                icon: const Icon(Icons.delete),
-                onPressed: controller.confirmDelete,
-                tooltip: 'delete'.tr,
-              )
+          icon: const Icon(Icons.edit),
+          onPressed: controller.goToEditCategory,
+          tooltip: 'edit'.tr,
+        ),
+        IconButton(
+          icon: const Icon(Icons.delete),
+          onPressed: controller.confirmDelete,
+          tooltip: 'delete'.tr,
+        ),
       ],
     );
   }
@@ -60,11 +62,11 @@ class CategoryDetailsPage extends GetView<CategoryController> {
             // Category header
             CategoryHeader(category: category),
             const SizedBox(height: 24),
-            
+
             // Services in this category header
             CategoryServicesHeader(controller: controller),
             const SizedBox(height: 16),
-            
+
             // Services list
             CategoryServicesList(controller: controller),
           ],

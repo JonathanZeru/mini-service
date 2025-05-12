@@ -6,10 +6,7 @@ import 'package:service_booking_app/presentation/widgets/settings_tile.dart';
 class OtherSettingsSection extends StatelessWidget {
   final SettingsController controller;
 
-  const OtherSettingsSection({
-    super.key,
-    required this.controller,
-  });
+  const OtherSettingsSection({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -18,9 +15,9 @@ class OtherSettingsSection extends StatelessWidget {
       children: [
         Text(
           'Other'.tr,
-          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-            fontWeight: FontWeight.bold,
-          ),
+          style: Theme.of(
+            context,
+          ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 8),
         Card(

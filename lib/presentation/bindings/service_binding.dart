@@ -13,7 +13,7 @@ class ServiceBinding extends Bindings {
     if (!Get.isRegistered<ApiProvider>()) {
       Get.lazyPut(() => ApiProvider(baseUrl: Constants.apiBaseUrl));
     }
-    
+
     if (!Get.isRegistered<ServicesRepository>()) {
       Get.lazyPut<ServicesRepository>(
         () => ServicesRepositoryImpl(
@@ -23,10 +23,10 @@ class ServiceBinding extends Bindings {
         ),
       );
     }
-    
+
     Get.lazyPut(() => GetService(Get.find<ServicesRepository>()));
     Get.lazyPut(() => DeleteService(Get.find<ServicesRepository>()));
-    
+
     Get.lazyPut(
       () => ServiceController(
         getService: Get.find<GetService>(),

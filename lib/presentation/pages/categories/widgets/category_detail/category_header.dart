@@ -6,10 +6,7 @@ import 'package:service_booking_app/data/models/category_model.dart';
 class CategoryHeader extends StatelessWidget {
   final CategoryModel category;
 
-  const CategoryHeader({
-    super.key,
-    required this.category,
-  });
+  const CategoryHeader({super.key, required this.category});
 
   @override
   Widget build(BuildContext context) {
@@ -17,9 +14,7 @@ class CategoryHeader extends StatelessWidget {
       tag: 'category-${category.id}',
       child: Card(
         elevation: 4,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         child: Padding(
           padding: const EdgeInsets.all(20),
           child: Column(
@@ -47,11 +42,7 @@ class CategoryHeader extends StatelessWidget {
             color: AppTheme.primaryColor.withOpacity(0.2),
             borderRadius: BorderRadius.circular(12),
           ),
-          child: Icon(
-            Icons.category,
-            size: 30,
-            color: AppTheme.primaryColor,
-          ),
+          child: Icon(Icons.category, size: 30, color: AppTheme.primaryColor),
         ),
         const SizedBox(width: 16),
         Expanded(
@@ -77,9 +68,10 @@ class CategoryHeader extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       decoration: BoxDecoration(
-        color: Theme.of(context).brightness == Brightness.dark
-            ? Colors.grey[800]
-            : Colors.grey[200],
+        color:
+            Theme.of(context).brightness == Brightness.dark
+                ? Colors.grey[800]
+                : Colors.grey[200],
         borderRadius: BorderRadius.circular(16),
       ),
       child: Text(
@@ -95,9 +87,9 @@ class CategoryHeader extends StatelessWidget {
       children: [
         Text(
           'description'.tr,
-          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-            fontWeight: FontWeight.bold,
-          ),
+          style: Theme.of(
+            context,
+          ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 8),
         Text(

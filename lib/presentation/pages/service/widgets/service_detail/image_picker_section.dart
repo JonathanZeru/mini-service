@@ -7,10 +7,7 @@ import 'package:service_booking_app/presentation/controllers/service_form_contro
 class ImagePickerSection extends StatelessWidget {
   final ServiceFormController controller;
 
-  const ImagePickerSection({
-    super.key,
-    required this.controller,
-  });
+  const ImagePickerSection({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -21,9 +18,10 @@ class ImagePickerSection extends StatelessWidget {
           width: 200,
           height: 200,
           decoration: BoxDecoration(
-            color: Theme.of(context).brightness == Brightness.dark
-                ? Colors.grey[800]
-                : Colors.grey[200],
+            color:
+                Theme.of(context).brightness == Brightness.dark
+                    ? Colors.grey[800]
+                    : Colors.grey[200],
             borderRadius: BorderRadius.circular(12),
             border: Border.all(
               color: AppTheme.primaryColor.withOpacity(0.5),
@@ -45,12 +43,13 @@ class ImagePickerSection extends StatelessWidget {
                 child: CachedNetworkImage(
                   imageUrl: controller.imageUrl.value,
                   fit: BoxFit.cover,
-                  placeholder: (context, url) => const Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                  errorWidget: (context, url, error) => const Center(
-                    child: Icon(Icons.image_not_supported, size: 50),
-                  ),
+                  placeholder:
+                      (context, url) =>
+                          const Center(child: CircularProgressIndicator()),
+                  errorWidget:
+                      (context, url, error) => const Center(
+                        child: Icon(Icons.image_not_supported, size: 50),
+                      ),
                 ),
               );
             } else {
@@ -67,9 +66,7 @@ class ImagePickerSection extends StatelessWidget {
                     Text(
                       'tap_to_add_image'.tr,
                       textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: AppTheme.primaryColor,
-                      ),
+                      style: TextStyle(color: AppTheme.primaryColor),
                     ),
                   ],
                 ),

@@ -22,10 +22,10 @@ class CategoryFormController extends GetxController {
   final formKey = GlobalKey<FormState>();
   final TextEditingController nameController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
-  
+
   final RxBool isLoading = false.obs;
   final RxBool isSaving = false.obs;
-  
+
   final RxBool _isFormValid = false.obs;
   bool get isFormValid => _isFormValid.value;
 
@@ -39,7 +39,7 @@ class CategoryFormController extends GetxController {
       categoryId = Get.arguments as String;
       loadCategory();
     }
-    
+
     nameController.addListener(checkFormValidity);
     descriptionController.addListener(checkFormValidity);
   }
@@ -55,7 +55,7 @@ class CategoryFormController extends GetxController {
 
   Future<void> loadCategory() async {
     if (categoryId == null) return;
-    
+
     isLoading.value = true;
     final result = await getCategory(categoryId!);
     result.fold(
@@ -85,7 +85,7 @@ class CategoryFormController extends GetxController {
   Future<void> saveCategory() async {
     if (formKey.currentState?.validate() ?? false) {
       isSaving.value = true;
-      
+
       final category = CategoryModel(
         id: categoryId,
         name: nameController.text.trim(),
@@ -94,9 +94,10 @@ class CategoryFormController extends GetxController {
       );
 
       try {
-        final result = isEditing
-            ? await updateCategory(categoryId!, category)
-            : await createCategory(category);
+        final result =
+            isEditing
+                ? await updateCategory(categoryId!, category)
+                : await createCategory(category);
 
         result.fold(
           (failure) {
@@ -110,9 +111,10 @@ class CategoryFormController extends GetxController {
           (successCategory) {
             UIHelpers.showSnackbar(
               title: 'Success',
-              message: isEditing 
-                  ? 'Category updated successfully' 
-                  : 'Category created successfully',
+              message:
+                  isEditing
+                      ? 'Category updated successfully'
+                      : 'Category created successfully',
               isError: false,
             );
             try {
@@ -142,7 +144,7 @@ class CategoryFormController extends GetxController {
   void onClose() {
     nameController.removeListener(checkFormValidity);
     descriptionController.removeListener(checkFormValidity);
-    
+
     nameController.dispose();
     descriptionController.dispose();
     super.onClose();

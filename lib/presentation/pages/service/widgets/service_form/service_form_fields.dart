@@ -6,10 +6,7 @@ import 'package:service_booking_app/presentation/controllers/service_form_contro
 class ServiceFormFields extends StatelessWidget {
   final ServiceFormController controller;
 
-  const ServiceFormFields({
-    super.key,
-    required this.controller,
-  });
+  const ServiceFormFields({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -24,22 +21,25 @@ class ServiceFormFields extends StatelessWidget {
             border: const OutlineInputBorder(),
           ),
           value: controller.selectedCategory.value?.id,
-          items: controller.categories.map((category) {
-            return DropdownMenuItem<String>(
-              value: category.id,
-              child: Text(category.name),
-            );
-          }).toList(),
+          items:
+              controller.categories.map((category) {
+                return DropdownMenuItem<String>(
+                  value: category.id,
+                  child: Text(category.name),
+                );
+              }).toList(),
           onChanged: (value) {
             if (value != null) {
-              final category = controller.categories.firstWhere((c) => c.id == value);
+              final category = controller.categories.firstWhere(
+                (c) => c.id == value,
+              );
               controller.setSelectedCategory(category);
             }
           },
           validator: (_) => controller.validateCategory(),
         ),
         const SizedBox(height: 16),
-        
+
         // Service name
         TextFormField(
           controller: controller.nameController,
@@ -49,11 +49,12 @@ class ServiceFormFields extends StatelessWidget {
             prefixIcon: const Icon(Icons.home_repair_service),
             border: const OutlineInputBorder(),
           ),
-          validator: (value) => controller.validateNotEmpty(value, 'service_name'.tr),
+          validator:
+              (value) => controller.validateNotEmpty(value, 'service_name'.tr),
           textInputAction: TextInputAction.next,
         ),
         const SizedBox(height: 16),
-        
+
         // Price
         TextFormField(
           controller: controller.priceController,
@@ -67,11 +68,12 @@ class ServiceFormFields extends StatelessWidget {
           inputFormatters: [
             FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}')),
           ],
-          validator: (value) => controller.validateNumeric(value, 'service_price'.tr),
+          validator:
+              (value) => controller.validateNumeric(value, 'service_price'.tr),
           textInputAction: TextInputAction.next,
         ),
         const SizedBox(height: 16),
-        
+
         // Duration
         TextFormField(
           controller: controller.durationController,
@@ -83,14 +85,14 @@ class ServiceFormFields extends StatelessWidget {
             suffixText: 'minutes'.tr,
           ),
           keyboardType: TextInputType.number,
-          inputFormatters: [
-            FilteringTextInputFormatter.digitsOnly,
-          ],
-          validator: (value) => controller.validateInteger(value, 'service_duration'.tr),
+          inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+          validator:
+              (value) =>
+                  controller.validateInteger(value, 'service_duration'.tr),
           textInputAction: TextInputAction.next,
         ),
         const SizedBox(height: 16),
-        
+
         // Rating
         TextFormField(
           controller: controller.ratingController,

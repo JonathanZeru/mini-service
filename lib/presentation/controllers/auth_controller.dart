@@ -33,33 +33,33 @@ class AuthController extends GetxController {
     checkAuthStatus();
   }
 
-Future<bool> checkAuthStatus() async {
-  isLoading.value = true;
+  Future<bool> checkAuthStatus() async {
+    isLoading.value = true;
 
-  final loggedInResult = await isLoggedIn();
+    final loggedInResult = await isLoggedIn();
 
-  bool result = false;
+    bool result = false;
 
-  if (loggedInResult.isRight()) {
-    final isLoggedInValue = loggedInResult.getOrElse(() => false);
-    isAuthenticated.value = isLoggedInValue;
-    result = isLoggedInValue;
+    if (loggedInResult.isRight()) {
+      final isLoggedInValue = loggedInResult.getOrElse(() => false);
+      isAuthenticated.value = isLoggedInValue;
+      result = isLoggedInValue;
 
-    if (isLoggedInValue) {
-    Get.offAllNamed(Routes.home);
-      _loadCurrentUser();
+      if (isLoggedInValue) {
+        Get.offAllNamed(Routes.home);
+        _loadCurrentUser();
+      } else {
+        user.value = null;
+        Get.offAllNamed(Routes.login);
+      }
     } else {
+      isAuthenticated.value = false;
       user.value = null;
-    Get.offAllNamed(Routes.login);
     }
-  } else {
-    isAuthenticated.value = false;
-    user.value = null;
-  }
 
-  isLoading.value = false;
-  return result;
-}
+    isLoading.value = false;
+    return result;
+  }
 
   Future<void> _loadCurrentUser() async {
     final userResult = await getCurrentUser();
@@ -73,47 +73,49 @@ Future<bool> checkAuthStatus() async {
     );
   }
 
- Future<bool> loginUser(String username, String password) async {
-  isLoading.value = true;
+  Future<bool> loginUser(String username, String password) async {
+    isLoading.value = true;
 
-  final result = await login(username, password);
+    final result = await login(username, password);
 
-  return result.fold(
-    (failure) {
-      UIHelpers.showSnackbar(
-        title: 'error'.tr,
-        message: failure.message,
-        isError: true,
-      );
-      isLoading.value = false;
-      return false;
-    },
-    (loggedInUser) {
-      user.value = loggedInUser;
-      isAuthenticated.value = true;
-          UIHelpers.showSnackbar(
+    return result.fold(
+      (failure) {
+        UIHelpers.showSnackbar(
+          title: 'error'.tr,
+          message: failure.message,
+          isError: true,
+        );
+        isLoading.value = false;
+        return false;
+      },
+      (loggedInUser) {
+        user.value = loggedInUser;
+        isAuthenticated.value = true;
+        UIHelpers.showSnackbar(
           title: 'success'.tr,
           message: 'login_success'.tr,
           isError: false,
         );
-      Get.put(AuthController(
-        login: Get.find<Login>(),
-        register: Get.find<Register>(),
-        logout: Get.find<Logout>(),
-        getCurrentUser: Get.find<GetCurrentUser>(),
-        isLoggedIn: Get.find<IsLoggedIn>(),
-      ), permanent: true);
+        Get.put(
+          AuthController(
+            login: Get.find<Login>(),
+            register: Get.find<Register>(),
+            logout: Get.find<Logout>(),
+            getCurrentUser: Get.find<GetCurrentUser>(),
+            isLoggedIn: Get.find<IsLoggedIn>(),
+          ),
+          permanent: true,
+        );
 
-      Future.delayed(Duration.zero, () {
-        Get.offAllNamed(Routes.home);
-      });
-      
-      isLoading.value = false;
-      return true;
-    },
-  );
-}
+        Future.delayed(Duration.zero, () {
+          Get.offAllNamed(Routes.home);
+        });
 
+        isLoading.value = false;
+        return true;
+      },
+    );
+  }
 
   Future<bool> registerUser(
     String username,

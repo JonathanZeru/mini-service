@@ -6,11 +6,7 @@ class LoadingIndicator extends StatelessWidget {
   final double size;
   final String? message;
 
-  const LoadingIndicator({
-    super.key,
-    this.size = 200,
-    this.message,
-  });
+  const LoadingIndicator({super.key, this.size = 200, this.message});
 
   @override
   Widget build(BuildContext context) {
@@ -27,9 +23,9 @@ class LoadingIndicator extends StatelessWidget {
             const SizedBox(height: 16),
             Text(
               message!,
-              style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                color: AppTheme.primaryColor,
-              ),
+              style: Theme.of(
+                context,
+              ).textTheme.titleMedium?.copyWith(color: AppTheme.primaryColor),
               textAlign: TextAlign.center,
             ),
           ],

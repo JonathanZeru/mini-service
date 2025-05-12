@@ -1,6 +1,6 @@
 class Routes {
   Routes._();
-  
+
   static const splash = '/splash';
   static const login = '/login';
   static const register = '/register';
@@ -13,5 +13,4 @@ class Routes {
   static const createCategory = '/create-category';
   static const editCategory = '/edit-category';
   static const settings = '/settings';
-
 }

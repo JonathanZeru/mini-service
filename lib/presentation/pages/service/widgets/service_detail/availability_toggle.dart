@@ -6,34 +6,30 @@ import 'package:service_booking_app/presentation/controllers/service_form_contro
 class AvailabilityToggle extends StatelessWidget {
   final ServiceFormController controller;
 
-  const AvailabilityToggle({
-    super.key,
-    required this.controller,
-  });
+  const AvailabilityToggle({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {
     return Card(
       elevation: 0,
-      color: Theme.of(context).brightness == Brightness.dark
-          ? Colors.grey[800]
-          : Colors.grey[100],
+      color:
+          Theme.of(context).brightness == Brightness.dark
+              ? Colors.grey[800]
+              : Colors.grey[100],
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
         side: BorderSide(
-          color: Theme.of(context).brightness == Brightness.dark
-              ? Colors.grey[700]!
-              : Colors.grey[300]!,
+          color:
+              Theme.of(context).brightness == Brightness.dark
+                  ? Colors.grey[700]!
+                  : Colors.grey[300]!,
         ),
       ),
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Row(
           children: [
-            Icon(
-              Icons.event_available,
-              color: AppTheme.primaryColor,
-            ),
+            Icon(Icons.event_available, color: AppTheme.primaryColor),
             const SizedBox(width: 16),
             Expanded(
               child: Column(
@@ -50,11 +46,13 @@ class AvailabilityToggle extends StatelessWidget {
                 ],
               ),
             ),
-            Obx(() => Switch(
-              value: controller.availability.value,
-              onChanged: (value) => controller.availability.value = value,
-              activeColor: AppTheme.primaryColor,
-            )),
+            Obx(
+              () => Switch(
+                value: controller.availability.value,
+                onChanged: (value) => controller.availability.value = value,
+                activeColor: AppTheme.primaryColor,
+              ),
+            ),
           ],
         ),
       ),

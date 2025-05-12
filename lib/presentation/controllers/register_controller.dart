@@ -12,12 +12,13 @@ class RegisterController extends GetxController {
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPasswordController = TextEditingController();
-  
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
+
   final RxBool isPasswordVisible = false.obs;
   final RxBool isConfirmPasswordVisible = false.obs;
   final RxBool agreeToTerms = false.obs;
-  
+
   // Add this for form validation tracking
   final RxBool _isFormValid = false.obs;
   bool get isFormValid => _isFormValid.value;
@@ -25,13 +26,13 @@ class RegisterController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    
+
     // Add listeners to text controllers
     usernameController.addListener(checkFormValidity);
     emailController.addListener(checkFormValidity);
     passwordController.addListener(checkFormValidity);
     confirmPasswordController.addListener(checkFormValidity);
-    
+
     // Add reaction to terms checkbox
     ever(agreeToTerms, (_) => checkFormValidity());
   }
@@ -43,7 +44,7 @@ class RegisterController extends GetxController {
     emailController.removeListener(checkFormValidity);
     passwordController.removeListener(checkFormValidity);
     confirmPasswordController.removeListener(checkFormValidity);
-    
+
     usernameController.dispose();
     emailController.dispose();
     passwordController.dispose();
@@ -133,12 +134,12 @@ class RegisterController extends GetxController {
       );
       return;
     }
-    
+
     if (formKey.currentState?.validate() ?? false) {
       final username = usernameController.text.trim();
       final email = emailController.text.trim();
       final password = passwordController.text.trim();
-      
+
       await authController.registerUser(username, email, password);
     }
   }

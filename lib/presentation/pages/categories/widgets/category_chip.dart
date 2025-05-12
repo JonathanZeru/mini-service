@@ -21,17 +21,16 @@ class CategoryChip extends StatelessWidget {
       onSelected: onSelected,
       checkmarkColor: Colors.white,
       selectedColor: AppTheme.primaryColor,
-      backgroundColor: Theme.of(context).brightness == Brightness.dark
-          ? Colors.grey[800]
-          : Colors.grey[200],
+      backgroundColor:
+          Theme.of(context).brightness == Brightness.dark
+              ? Colors.grey[800]
+              : Colors.grey[200],
       labelStyle: TextStyle(
         color: isSelected ? Colors.white : null,
         fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
       ),
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       elevation: isSelected ? 2 : 0,
       shadowColor: isSelected ? AppTheme.primaryColor.withOpacity(0.5) : null,
     );

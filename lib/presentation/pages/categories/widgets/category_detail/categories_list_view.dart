@@ -11,10 +11,7 @@ import 'package:service_booking_app/presentation/widgets/loading_indicator.dart'
 class CategoriesListView extends StatelessWidget {
   final CategoriesController controller;
 
-  const CategoriesListView({
-    super.key,
-    required this.controller,
-  });
+  const CategoriesListView({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -28,27 +25,30 @@ class CategoriesListView extends StatelessWidget {
           ),
         );
       }
-      
+
       if (controller.filteredCategories.isEmpty) {
         return EmptyState(
           icon: Icons.category_outlined,
           title: 'no_categories_found'.tr,
           message: 'try_different_search'.tr,
-          buttonText: controller.searchQuery.value.isNotEmpty
-              ? 'clear_search'.tr
-              : 'add_category'.tr,
-          onButtonPressed: controller.searchQuery.value.isNotEmpty
-              ? () => controller.updateSearchQuery('')
-              : controller.goToCreateCategory,
+          buttonText:
+              controller.searchQuery.value.isNotEmpty
+                  ? 'clear_search'.tr
+                  : 'add_category'.tr,
+          onButtonPressed:
+              controller.searchQuery.value.isNotEmpty
+                  ? () => controller.updateSearchQuery('')
+                  : controller.goToCreateCategory,
         );
       }
-      
+
       return RefreshIndicator(
         onRefresh: controller.fetchCategories,
         color: AppTheme.primaryColor,
         child: NotificationListener<ScrollNotification>(
           onNotification: (ScrollNotification scrollInfo) {
-            if (scrollInfo.metrics.pixels == scrollInfo.metrics.maxScrollExtent &&
+            if (scrollInfo.metrics.pixels ==
+                    scrollInfo.metrics.maxScrollExtent &&
                 !controller.isLoadingMore.value &&
                 controller.hasMoreCategories.value) {
               controller.loadMoreCategories();
@@ -58,14 +58,18 @@ class CategoriesListView extends StatelessWidget {
           child: AnimationLimiter(
             child: ListView.builder(
               padding: const EdgeInsets.all(16),
-              itemCount: controller.filteredCategories.length + 
-                        (controller.isLoadingMore.value || controller.hasMoreCategories.value ? 1 : 0),
+              itemCount:
+                  controller.filteredCategories.length +
+                  (controller.isLoadingMore.value ||
+                          controller.hasMoreCategories.value
+                      ? 1
+                      : 0),
               itemBuilder: (context, index) {
                 // Show loading indicator at the bottom
                 if (index == controller.filteredCategories.length) {
                   return _buildLoadMoreIndicator();
                 }
-                
+
                 return _buildCategoryItem(index);
               },
             ),
@@ -79,12 +83,13 @@ class CategoriesListView extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 16.0),
       child: Center(
-        child: controller.isLoadingMore.value
-            ? const LoadingIndicator(size: 50)
-            : TextButton(
-                onPressed: controller.loadMoreCategories,
-                child: Text('load_more'.tr),
-              ),
+        child:
+            controller.isLoadingMore.value
+                ? const LoadingIndicator(size: 50)
+                : TextButton(
+                  onPressed: controller.loadMoreCategories,
+                  child: Text('load_more'.tr),
+                ),
       ),
     );
   }

@@ -17,7 +17,8 @@ class AnimatedSearchBar extends StatefulWidget {
   State<AnimatedSearchBar> createState() => _AnimatedSearchBarState();
 }
 
-class _AnimatedSearchBarState extends State<AnimatedSearchBar> with SingleTickerProviderStateMixin {
+class _AnimatedSearchBarState extends State<AnimatedSearchBar>
+    with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _animation;
   final TextEditingController _textController = TextEditingController();
@@ -61,7 +62,7 @@ class _AnimatedSearchBarState extends State<AnimatedSearchBar> with SingleTicker
   @override
   Widget build(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
-    
+
     return AnimatedContainer(
       duration: const Duration(milliseconds: 300),
       height: 56,
@@ -95,7 +96,7 @@ class _AnimatedSearchBarState extends State<AnimatedSearchBar> with SingleTicker
               ),
             ),
           ),
-          
+
           // Search field
           Expanded(
             child: SizeTransition(
@@ -113,7 +114,7 @@ class _AnimatedSearchBarState extends State<AnimatedSearchBar> with SingleTicker
               ),
             ),
           ),
-          
+
           // Clear button
           SizeTransition(
             sizeFactor: _animation,

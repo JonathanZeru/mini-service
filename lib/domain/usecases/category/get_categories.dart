@@ -8,7 +8,10 @@ class GetCategories {
 
   GetCategories(this.repository);
 
-  Future<Either<Failure, List<CategoryModel>>> call({int? page, int? limit}) async {
+  Future<Either<Failure, List<CategoryModel>>> call({
+    int? page,
+    int? limit,
+  }) async {
     return await repository.getCategories(page: page, limit: limit);
   }
 }

@@ -23,7 +23,7 @@ class ServiceActionButtons extends StatelessWidget {
           width: double.infinity,
         ),
         const SizedBox(height: 16),
-        
+
         // Contact provider button
         CustomButton(
           text: 'contact_provider'.tr,

@@ -7,15 +7,13 @@ class LoginBinding extends Bindings {
   @override
   void dependencies() {
     Get.find<AuthController>();
-    
+
     if (!Get.isRegistered<LanguageController>()) {
       Get.put(LanguageController(), permanent: true);
     }
-     Get.lazyPut<LoginController>(
-      () => LoginController(
-        authController: Get.find(),
-      ),
-      fenix: true, 
+    Get.lazyPut<LoginController>(
+      () => LoginController(authController: Get.find()),
+      fenix: true,
     );
   }
 }

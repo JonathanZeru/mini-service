@@ -20,14 +20,12 @@ class ServiceCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
-    
+
     return Card(
       margin: const EdgeInsets.only(bottom: 16),
       clipBehavior: Clip.antiAlias,
       elevation: 2,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: InkWell(
         onTap: onTap,
         splashColor: AppTheme.primaryColor.withOpacity(0.1),
@@ -43,19 +41,26 @@ class ServiceCard extends StatelessWidget {
                   child: CachedNetworkImage(
                     imageUrl: service.imageUrl!,
                     fit: BoxFit.cover,
-                    placeholder: (context, url) => Shimmer.fromColors(
-                      baseColor: isDarkMode ? Colors.grey[800]! : Colors.grey[300]!,
-                      highlightColor: isDarkMode ? Colors.grey[700]! : Colors.grey[100]!,
-                      child: Container(
-                        color: Colors.white,
-                      ),
-                    ),
-                    errorWidget: (context, url, error) => Container(
-                      color: isDarkMode ? Colors.grey[800] : Colors.grey[200],
-                      child: const Center(
-                        child: Icon(Icons.image_not_supported, size: 40),
-                      ),
-                    ),
+                    placeholder:
+                        (context, url) => Shimmer.fromColors(
+                          baseColor:
+                              isDarkMode
+                                  ? Colors.grey[800]!
+                                  : Colors.grey[300]!,
+                          highlightColor:
+                              isDarkMode
+                                  ? Colors.grey[700]!
+                                  : Colors.grey[100]!,
+                          child: Container(color: Colors.white),
+                        ),
+                    errorWidget:
+                        (context, url, error) => Container(
+                          color:
+                              isDarkMode ? Colors.grey[800] : Colors.grey[200],
+                          child: const Center(
+                            child: Icon(Icons.image_not_supported, size: 40),
+                          ),
+                        ),
                   ),
                 ),
                 // Availability badge
@@ -63,11 +68,15 @@ class ServiceCard extends StatelessWidget {
                   top: 8,
                   right: 8,
                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 4,
+                    ),
                     decoration: BoxDecoration(
-                      color: service.availability
-                          ? Colors.green.withOpacity(0.9)
-                          : Colors.red.withOpacity(0.9),
+                      color:
+                          service.availability
+                              ? Colors.green.withOpacity(0.9)
+                              : Colors.red.withOpacity(0.9),
                       borderRadius: BorderRadius.circular(16),
                     ),
                     child: Text(
@@ -82,7 +91,7 @@ class ServiceCard extends StatelessWidget {
                 ),
               ],
             ),
-            
+
             // Service details
             Padding(
               padding: const EdgeInsets.all(16),
@@ -96,15 +105,17 @@ class ServiceCard extends StatelessWidget {
                       Expanded(
                         child: Text(
                           service.name,
-                          style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                            fontWeight: FontWeight.bold,
-                          ),
+                          style: Theme.of(context).textTheme.titleLarge
+                              ?.copyWith(fontWeight: FontWeight.bold),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 8,
+                          vertical: 4,
+                        ),
                         decoration: BoxDecoration(
                           color: AppTheme.primaryColor,
                           borderRadius: BorderRadius.circular(8),
@@ -120,29 +131,34 @@ class ServiceCard extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 8),
-                  
+
                   // Category
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 4,
+                    ),
                     decoration: BoxDecoration(
-                      color: isDarkMode
-                          ? AppTheme.primaryDarkColor.withOpacity(0.2)
-                          : AppTheme.primaryLightColor.withOpacity(0.2),
+                      color:
+                          isDarkMode
+                              ? AppTheme.primaryDarkColor.withOpacity(0.2)
+                              : AppTheme.primaryLightColor.withOpacity(0.2),
                       borderRadius: BorderRadius.circular(16),
                     ),
                     child: Text(
                       categoryName,
                       style: TextStyle(
                         fontSize: 12,
-                        color: isDarkMode
-                            ? AppTheme.primaryLightColor
-                            : AppTheme.primaryDarkColor,
+                        color:
+                            isDarkMode
+                                ? AppTheme.primaryLightColor
+                                : AppTheme.primaryDarkColor,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
                   ),
                   const SizedBox(height: 8),
-                  
+
                   // Rating and duration
                   Row(
                     children: [
@@ -158,7 +174,7 @@ class ServiceCard extends StatelessWidget {
                         ],
                       ),
                       const SizedBox(width: 16),
-                      
+
                       // Duration
                       Row(
                         children: [

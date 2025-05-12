@@ -5,10 +5,7 @@ import 'package:service_booking_app/presentation/controllers/settings_controller
 class LogoutButton extends StatelessWidget {
   final SettingsController controller;
 
-  const LogoutButton({
-    super.key,
-    required this.controller,
-  });
+  const LogoutButton({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {

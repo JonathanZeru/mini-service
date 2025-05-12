@@ -21,7 +21,8 @@ class HiveManager {
   // Categories methods
   static Future<void> saveCategories(List<CategoryModel> categories) async {
     final box = Hive.box<String>(categoriesBox);
-    final categoriesJson = categories.map((c) => jsonEncode(c.toJson())).toList();
+    final categoriesJson =
+        categories.map((c) => jsonEncode(c.toJson())).toList();
     await box.put('all_categories', jsonEncode(categoriesJson));
   }
 
@@ -29,10 +30,15 @@ class HiveManager {
     final box = Hive.box<String>(categoriesBox);
     final categoriesJson = box.get('all_categories');
     if (categoriesJson == null) return [];
-    
-    final List<dynamic> decodedList = jsonDecode(categoriesJson) as List<dynamic>;
+
+    final List<dynamic> decodedList =
+        jsonDecode(categoriesJson) as List<dynamic>;
     return decodedList
-        .map((c) => CategoryModel.fromJson(jsonDecode(c as String) as Map<String, dynamic>))
+        .map(
+          (c) => CategoryModel.fromJson(
+            jsonDecode(c as String) as Map<String, dynamic>,
+          ),
+        )
         .toList();
   }
 
@@ -45,8 +51,10 @@ class HiveManager {
     final box = Hive.box<String>(categoriesBox);
     final categoryJson = box.get(id);
     if (categoryJson == null) return null;
-    
-    return CategoryModel.fromJson(jsonDecode(categoryJson) as Map<String, dynamic>);
+
+    return CategoryModel.fromJson(
+      jsonDecode(categoryJson) as Map<String, dynamic>,
+    );
   }
 
   static Future<void> deleteCategory(String id) async {
@@ -65,10 +73,14 @@ class HiveManager {
     final box = Hive.box<String>(servicesBox);
     final servicesJson = box.get('all_services');
     if (servicesJson == null) return [];
-    
+
     final List<dynamic> decodedList = jsonDecode(servicesJson) as List;
     return decodedList
-        .map((s) => ServiceModel.fromJson(jsonDecode(s as String) as Map<String, dynamic>))
+        .map(
+          (s) => ServiceModel.fromJson(
+            jsonDecode(s as String) as Map<String, dynamic>,
+          ),
+        )
         .toList();
   }
 
@@ -81,8 +93,10 @@ class HiveManager {
     final box = Hive.box<String>(servicesBox);
     final serviceJson = box.get(id);
     if (serviceJson == null) return null;
-    
-    return ServiceModel.fromJson(jsonDecode(serviceJson) as Map<String, dynamic>);
+
+    return ServiceModel.fromJson(
+      jsonDecode(serviceJson) as Map<String, dynamic>,
+    );
   }
 
   static Future<void> deleteService(String id) async {
@@ -100,7 +114,7 @@ class HiveManager {
     final box = Hive.box<String>(userBox);
     final userJson = box.get('current_user');
     if (userJson == null) return null;
-    
+
     return UserModel.fromJson(jsonDecode(userJson) as Map<String, dynamic>);
   }
 
@@ -134,7 +148,7 @@ class HiveManager {
     final categoriesBoxInstance = Hive.box<String>(categoriesBox);
     final servicesBoxInstance = Hive.box<String>(servicesBox);
     final userBoxInstance = Hive.box<String>(userBox);
-    
+
     await categoriesBoxInstance.clear();
     await servicesBoxInstance.clear();
     await userBoxInstance.clear();

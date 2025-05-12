@@ -6,10 +6,7 @@ import 'package:service_booking_app/presentation/widgets/animated_search_bar.dar
 class CategoriesSearchBar extends StatelessWidget {
   final HomeController controller;
 
-  const CategoriesSearchBar({
-    super.key,
-    required this.controller,
-  });
+  const CategoriesSearchBar({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {

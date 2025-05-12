@@ -21,8 +21,7 @@ class HomeController extends GetxController {
     required this.authController,
   });
 
-
- // Tab navigation
+  // Tab navigation
   final RxInt currentIndex = 0.obs;
 
   // Services tab
@@ -75,21 +74,25 @@ class HomeController extends GetxController {
       services.clear();
       hasMoreServices.value = true;
     }
-    
+
     // Apply filters
-    String? categoryId = selectedCategoryId.value == 'All' ? null : selectedCategoryId.value;
+    String? categoryId =
+        selectedCategoryId.value == 'All' ? null : selectedCategoryId.value;
     bool? availability = filterAvailableOnly.value ? true : null;
-    double? minPriceFilter = selectedMinPrice.value > minPrice.value ? selectedMinPrice.value : null;
-    double? maxPriceFilter = selectedMaxPrice.value < maxPrice.value ? selectedMaxPrice.value : null;
-    double? ratingFilter = selectedRating.value > 0 ? selectedRating.value : null;
-    
+    double? minPriceFilter =
+        selectedMinPrice.value > minPrice.value ? selectedMinPrice.value : null;
+    double? maxPriceFilter =
+        selectedMaxPrice.value < maxPrice.value ? selectedMaxPrice.value : null;
+    double? ratingFilter =
+        selectedRating.value > 0 ? selectedRating.value : null;
+
     final result = await getServices(
       categoryId: categoryId,
       availability: availability,
       page: currentServicesPage.value,
       limit: servicesPerPage,
     );
-    
+
     result.fold(
       (failure) {
         UIHelpers.showSnackbar(
@@ -104,27 +107,30 @@ class HomeController extends GetxController {
         } else {
           services.addAll(data);
         }
-        
+
         // Check if we've reached the end of the list
         if (data.length < servicesPerPage) {
           hasMoreServices.value = false;
         }
-        
+
         // Apply client-side filtering for price range if needed
         if (minPriceFilter != null || maxPriceFilter != null) {
-          services.value = services.where((service) {
-            bool passesMinPrice = minPriceFilter == null || service.price >= minPriceFilter;
-            bool passesMaxPrice = maxPriceFilter == null || service.price <= maxPriceFilter;
-            return passesMinPrice && passesMaxPrice;
-          }).toList();
+          services.value =
+              services.where((service) {
+                bool passesMinPrice =
+                    minPriceFilter == null || service.price >= minPriceFilter;
+                bool passesMaxPrice =
+                    maxPriceFilter == null || service.price <= maxPriceFilter;
+                return passesMinPrice && passesMaxPrice;
+              }).toList();
         }
-        
+
         // Find min and max prices for the range slider
         if (services.isNotEmpty) {
           final prices = services.map((s) => s.price).toList();
           minPrice.value = prices.reduce((a, b) => a < b ? a : b);
           maxPrice.value = prices.reduce((a, b) => a > b ? a : b);
-          
+
           // Initialize selected values if they're outside the range
           if (selectedMinPrice.value < minPrice.value) {
             selectedMinPrice.value = minPrice.value;
@@ -133,73 +139,81 @@ class HomeController extends GetxController {
             selectedMaxPrice.value = maxPrice.value;
           }
         }
-        
+
         filterServices();
       },
     );
-    
+
     if (refresh) {
       isLoading.value = false;
     } else {
       isLoadingMore.value = false;
     }
   }
-   Future<void> loadMoreServices() async {
+
+  Future<void> loadMoreServices() async {
     if (isLoadingMore.value || !hasMoreServices.value) return;
-    
+
     isLoadingMore.value = true;
     currentServicesPage.value++;
     await fetchServices(refresh: false);
   }
+
   void updateSearchQuery(String query) {
     searchQuery.value = query;
     filterServices();
   }
 
   void filterServices() {
-  final query = searchQuery.value.toLowerCase();
-  
-  filteredServices.value = services.where((service) {
-    // Text search
-    final matchesQuery = service.name.toLowerCase().contains(query);
-    
-    // Category filter - null means show all categories
-    final matchesCategory = selectedCategoryId.value == null || 
-                          service.categoryId == selectedCategoryId.value;
-    
-    // Availability filter
-    final matchesAvailability = !filterAvailableOnly.value || service.availability;
-    
-    // Price range filter
-    final matchesPriceRange = service.price >= selectedMinPrice.value && 
-                            service.price <= selectedMaxPrice.value;
-    
-    // Rating filter
-    final matchesRating = service.rating >= selectedRating.value;
-    
-    return matchesQuery && matchesCategory && matchesAvailability && 
-          matchesPriceRange && matchesRating;
-  }).toList();
-}
+    final query = searchQuery.value.toLowerCase();
 
-void resetFilters() {
-  searchQuery.value = '';
-  selectedCategoryId.value = null; 
-  filterAvailableOnly.value = false;
-  selectedMinPrice.value = minPrice.value;
-  selectedMaxPrice.value = maxPrice.value;
-  selectedRating.value = 0.0;
-  
-  fetchServices(refresh: true);
-  
-  filterServices();
-}
+    filteredServices.value =
+        services.where((service) {
+          // Text search
+          final matchesQuery = service.name.toLowerCase().contains(query);
+
+          // Category filter - null means show all categories
+          final matchesCategory =
+              selectedCategoryId.value == null ||
+              service.categoryId == selectedCategoryId.value;
+
+          // Availability filter
+          final matchesAvailability =
+              !filterAvailableOnly.value || service.availability;
+
+          // Price range filter
+          final matchesPriceRange =
+              service.price >= selectedMinPrice.value &&
+              service.price <= selectedMaxPrice.value;
+
+          // Rating filter
+          final matchesRating = service.rating >= selectedRating.value;
+
+          return matchesQuery &&
+              matchesCategory &&
+              matchesAvailability &&
+              matchesPriceRange &&
+              matchesRating;
+        }).toList();
+  }
+
+  void resetFilters() {
+    searchQuery.value = '';
+    selectedCategoryId.value = null;
+    filterAvailableOnly.value = false;
+    selectedMinPrice.value = minPrice.value;
+    selectedMaxPrice.value = maxPrice.value;
+    selectedRating.value = 0.0;
+
+    fetchServices(refresh: true);
+
+    filterServices();
+  }
+
   void updateSelectedCategory(String? categoryId) {
     selectedCategoryId.value = categoryId;
     filterServices();
   }
-
-  
 
   void updateAvailabilityFilter(bool value) {
     filterAvailableOnly.value = value;
@@ -229,12 +243,12 @@ void resetFilters() {
       categories.clear();
       hasMoreCategories.value = true;
     }
-    
+
     final result = await getCategories(
       page: currentCategoriesPage.value,
       limit: categoriesPerPage,
     );
-    
+
     result.fold(
       (failure) {
         UIHelpers.showSnackbar(
@@ -249,16 +263,16 @@ void resetFilters() {
         } else {
           categories.addAll(data);
         }
-        
+
         // Check if we've reached the end of the list
         if (data.length < categoriesPerPage) {
           hasMoreCategories.value = false;
         }
-        
+
         filterCategories();
       },
     );
-    
+
     if (refresh) {
       isCategoriesLoading.value = false;
     } else {
@@ -268,19 +282,22 @@ void resetFilters() {
 
   Future<void> loadMoreCategories() async {
     if (isLoadingMoreCategories.value || !hasMoreCategories.value) return;
-    
+
     isLoadingMoreCategories.value = true;
     currentCategoriesPage.value++;
     await fetchCategories(refresh: false);
   }
+
   void filterCategories() {
     final query = categorySearchQuery.value.toLowerCase();
-    
-    filteredCategories.value = categories.where((category) {
-      return category.name.toLowerCase().contains(query) ||
-          category.description.toLowerCase().contains(query);
-    }).toList();
+
+    filteredCategories.value =
+        categories.where((category) {
+          return category.name.toLowerCase().contains(query) ||
+              category.description.toLowerCase().contains(query);
+        }).toList();
   }
+
   void updateCategorySearchQuery(String query) {
     categorySearchQuery.value = query;
     filterCategories();

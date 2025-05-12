@@ -12,9 +12,9 @@ class AccountSettingsSection extends StatelessWidget {
       children: [
         Text(
           'account_settings'.tr,
-          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-            fontWeight: FontWeight.bold,
-          ),
+          style: Theme.of(
+            context,
+          ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 8),
         Card(

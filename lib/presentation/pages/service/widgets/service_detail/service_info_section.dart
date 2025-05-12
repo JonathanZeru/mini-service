@@ -49,17 +49,17 @@ class ServiceInfoSection extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 16),
-        
+
         // Category, availability, rating, duration
         _buildServiceTags(context),
         const SizedBox(height: 24),
-        
+
         // Description
         Text(
           'description'.tr,
-          style: Theme.of(context).textTheme.titleLarge?.copyWith(
-            fontWeight: FontWeight.bold,
-          ),
+          style: Theme.of(
+            context,
+          ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 8),
         Text(
@@ -72,48 +72,42 @@ class ServiceInfoSection extends StatelessWidget {
 
   Widget _buildServiceTags(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
-    
+
     return Wrap(
       spacing: 8,
       runSpacing: 8,
       children: [
-        
         // Availability
         Chip(
-          label: Text(
-            service.availability ? 'available'.tr : 'unavailable'.tr,
-          ),
+          label: Text(service.availability ? 'available'.tr : 'unavailable'.tr),
           avatar: Icon(
             service.availability ? Icons.check_circle : Icons.cancel,
             size: 16,
             color: service.availability ? Colors.green : Colors.red,
           ),
-          backgroundColor: service.availability
-              ? Colors.green.withOpacity(0.1)
-              : Colors.red.withOpacity(0.1),
+          backgroundColor:
+              service.availability
+                  ? Colors.green.withOpacity(0.1)
+                  : Colors.red.withOpacity(0.1),
           labelStyle: TextStyle(
             color: service.availability ? Colors.green[700] : Colors.red[700],
           ),
         ),
-        
+
         // Rating
         Chip(
           label: Text(service.rating.toString()),
           avatar: const Icon(Icons.star, size: 16, color: Colors.amber),
           backgroundColor: Colors.amber.withOpacity(0.1),
-          labelStyle: TextStyle(
-            color: Colors.amber[700],
-          ),
+          labelStyle: TextStyle(color: Colors.amber[700]),
         ),
-        
+
         // Duration
         Chip(
           label: Text('${service.duration} ${'minutes'.tr}'),
           avatar: const Icon(Icons.access_time, size: 16),
           backgroundColor: Colors.blue.withOpacity(0.1),
-          labelStyle: TextStyle(
-            color: Colors.blue[700],
-          ),
+          labelStyle: TextStyle(color: Colors.blue[700]),
         ),
       ],
     );

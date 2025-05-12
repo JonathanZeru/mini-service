@@ -9,13 +9,13 @@ class CategoriesRepositoryImpl implements CategoriesRepository {
   final ApiProvider apiProvider;
   final String endpoint;
 
-  CategoriesRepositoryImpl({
-    required this.apiProvider,
-    required this.endpoint,
-  });
+  CategoriesRepositoryImpl({required this.apiProvider, required this.endpoint});
 
   @override
-  Future<Either<Failure, List<CategoryModel>>> getCategories({int? page, int? limit}) async {
+  Future<Either<Failure, List<CategoryModel>>> getCategories({
+    int? page,
+    int? limit,
+  }) async {
     try {
       // Build query parameters for pagination
       String queryString = '';
@@ -23,14 +23,22 @@ class CategoriesRepositoryImpl implements CategoriesRepository {
         queryString = '?';
         if (page != null) queryString += 'page=$page&';
         if (limit != null) queryString += 'limit=$limit&';
-        queryString = queryString.substring(0, queryString.length - 1); // Remove trailing &
+        queryString = queryString.substring(
+          0,
+          queryString.length - 1,
+        ); // Remove trailing &
       }
 
       final response = await apiProvider.get('$endpoint$queryString');
       final List<dynamic> categoriesJson = response.body as List;
-      final List<CategoryModel> categories = categoriesJson
-          .map((categoryJson) => CategoryModel.fromJson(categoryJson as Map<String, dynamic>))
-          .toList();
+      final List<CategoryModel> categories =
+          categoriesJson
+              .map(
+                (categoryJson) => CategoryModel.fromJson(
+                  categoryJson as Map<String, dynamic>,
+                ),
+              )
+              .toList();
       return Right(categories);
     } on ServerException catch (e) {
       return Left(ServerFailure(message: e.message));
@@ -49,7 +57,9 @@ class CategoriesRepositoryImpl implements CategoriesRepository {
   Future<Either<Failure, CategoryModel>> getCategory(String id) async {
     try {
       final response = await apiProvider.get('$endpoint/$id');
-      final CategoryModel category = CategoryModel.fromJson(response.body as Map<String, dynamic>);
+      final CategoryModel category = CategoryModel.fromJson(
+        response.body as Map<String, dynamic>,
+      );
       return Right(category);
     } on ServerException catch (e) {
       return Left(ServerFailure(message: e.message));
@@ -65,13 +75,17 @@ class CategoriesRepositoryImpl implements CategoriesRepository {
   }
 
   @override
-  Future<Either<Failure, CategoryModel>> createCategory(CategoryModel category) async {
+  Future<Either<Failure, CategoryModel>> createCategory(
+    CategoryModel category,
+  ) async {
     try {
       // Assuming apiProvider.post returns the parsed JSON response directly
       final response = await apiProvider.post(endpoint, category.toJson());
 
       // Create a category model from the response
-      final CategoryModel createdCategory = CategoryModel.fromJson(response.body as Map<String, dynamic>);
+      final CategoryModel createdCategory = CategoryModel.fromJson(
+        response.body as Map<String, dynamic>,
+      );
       return Right(createdCategory);
     } on ServerException catch (e) {
       return Left(ServerFailure(message: e.message));
@@ -88,11 +102,17 @@ class CategoriesRepositoryImpl implements CategoriesRepository {
 
   @override
   Future<Either<Failure, CategoryModel>> updateCategory(
-      String id, CategoryModel category) async {
+    String id,
+    CategoryModel category,
+  ) async {
     try {
-      final response =
-          await apiProvider.put('$endpoint/$id', category.toJson());
-      final CategoryModel updatedCategory = CategoryModel.fromJson(response.body as Map<String, dynamic>);
+      final response = await apiProvider.put(
+        '$endpoint/$id',
+        category.toJson(),
+      );
+      final CategoryModel updatedCategory = CategoryModel.fromJson(
+        response.body as Map<String, dynamic>,
+      );
       return Right(updatedCategory);
     } on ServerException catch (e) {
       return Left(ServerFailure(message: e.message));

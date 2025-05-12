@@ -30,7 +30,7 @@ class ServiceFormController extends GetxController {
   final TextEditingController priceController = TextEditingController();
   final TextEditingController durationController = TextEditingController();
   final TextEditingController ratingController = TextEditingController();
-  
+
   final RxBool availability = true.obs;
   final RxBool isLoading = false.obs;
   final RxBool isSaving = false.obs;
@@ -42,55 +42,55 @@ class ServiceFormController extends GetxController {
   String? serviceId;
   bool get isEditing => serviceId != null;
 
-final RxBool _isFormValid = false.obs;
-bool get isFormValid => _isFormValid.value;
+  final RxBool _isFormValid = false.obs;
+  bool get isFormValid => _isFormValid.value;
 
-void validateForm() {
-  final formValid = formKey.currentState?.validate() ?? false;
-  final categoryValid = selectedCategory.value != null;
-  final imageValid = imageFile.value != null || imageUrl.value.isNotEmpty;
-  _isFormValid.value = formValid && categoryValid && imageValid;
-}
-
-void checkFormValidity() {
-  validateForm();
-}
-
-@override
-void onInit() {
-  super.onInit();
-  fetchCategories();
-  if (Get.arguments != null) {
-    serviceId = Get.arguments as String;
-    loadService();
+  void validateForm() {
+    final formValid = formKey.currentState?.validate() ?? false;
+    final categoryValid = selectedCategory.value != null;
+    final imageValid = imageFile.value != null || imageUrl.value.isNotEmpty;
+    _isFormValid.value = formValid && categoryValid && imageValid;
   }
-  
-  // Add listeners to all text controllers
-  nameController.addListener(checkFormValidity);
-  priceController.addListener(checkFormValidity);
-  durationController.addListener(checkFormValidity);
-  ratingController.addListener(checkFormValidity);
-  
-  // Add reaction to category and image changes
-  ever(selectedCategory, (_) => checkFormValidity());
-  ever(imageFile, (_) => checkFormValidity());
-  ever(imageUrl, (_) => checkFormValidity());
-}
 
-@override
-void onClose() {
-  // Remove listeners to prevent memory leaks
-  nameController.removeListener(checkFormValidity);
-  priceController.removeListener(checkFormValidity);
-  durationController.removeListener(checkFormValidity);
-  ratingController.removeListener(checkFormValidity);
-  
-  nameController.dispose();
-  priceController.dispose();
-  durationController.dispose();
-  ratingController.dispose();
-  super.onClose();
-}
+  void checkFormValidity() {
+    validateForm();
+  }
+
+  @override
+  void onInit() {
+    super.onInit();
+    fetchCategories();
+    if (Get.arguments != null) {
+      serviceId = Get.arguments as String;
+      loadService();
+    }
+
+    // Add listeners to all text controllers
+    nameController.addListener(checkFormValidity);
+    priceController.addListener(checkFormValidity);
+    durationController.addListener(checkFormValidity);
+    ratingController.addListener(checkFormValidity);
+
+    // Add reaction to category and image changes
+    ever(selectedCategory, (_) => checkFormValidity());
+    ever(imageFile, (_) => checkFormValidity());
+    ever(imageUrl, (_) => checkFormValidity());
+  }
+
+  @override
+  void onClose() {
+    // Remove listeners to prevent memory leaks
+    nameController.removeListener(checkFormValidity);
+    priceController.removeListener(checkFormValidity);
+    durationController.removeListener(checkFormValidity);
+    ratingController.removeListener(checkFormValidity);
+
+    nameController.dispose();
+    priceController.dispose();
+    durationController.dispose();
+    ratingController.dispose();
+    super.onClose();
+  }
 
   Future<void> fetchCategories() async {
     isLoading.value = true;
@@ -112,7 +112,7 @@ void onClose() {
 
   Future<void> loadService() async {
     if (serviceId == null) return;
-    
+
     isLoading.value = true;
     final result = await getService(serviceId!);
     result.fold(
@@ -130,9 +130,11 @@ void onClose() {
         ratingController.text = data.rating.toString();
         availability.value = data.availability;
         imageUrl.value = data.imageUrl ?? '';
-        
+
         // Find and set the selected category
-        final category = categories.firstWhereOrNull((c) => c.id == data.categoryId);
+        final category = categories.firstWhereOrNull(
+          (c) => c.id == data.categoryId,
+        );
         if (category != null) {
           selectedCategory.value = category;
         }
@@ -149,7 +151,7 @@ void onClose() {
     try {
       final picker = ImagePicker();
       final pickedFile = await picker.pickImage(source: source);
-      
+
       if (pickedFile != null) {
         imageFile.value = File(pickedFile.path);
       }
@@ -257,7 +259,7 @@ void onClose() {
       );
       return;
     }
-    
+
     // Validate image
     final imageError = validateImage();
     if (imageError != null) {
@@ -268,10 +270,10 @@ void onClose() {
       );
       return;
     }
-    
+
     if (formKey.currentState?.validate() ?? false) {
       isSaving.value = true;
-      
+
       final service = ServiceModel(
         id: serviceId,
         name: nameController.text.trim(),
@@ -284,9 +286,14 @@ void onClose() {
         createdAt: DateTime.now(),
       );
 
-      final result = isEditing
-          ? await updateService(serviceId!, service, imageFile: imageFile.value)
-          : await createService(service, imageFile: imageFile.value);
+      final result =
+          isEditing
+              ? await updateService(
+                serviceId!,
+                service,
+                imageFile: imageFile.value,
+              )
+              : await createService(service, imageFile: imageFile.value);
 
       result.fold(
         (failure) {
@@ -299,12 +306,13 @@ void onClose() {
         (_) {
           UIHelpers.showSnackbar(
             title: 'Success',
-            message: isEditing
-                ? 'Service updated successfully'
-                : 'Service created successfully',
+            message:
+                isEditing
+                    ? 'Service updated successfully'
+                    : 'Service created successfully',
             isError: false,
           );
-          
+
           try {
             final homeController = Get.find<HomeController>();
             homeController.fetchServices().then((_) {
@@ -315,9 +323,8 @@ void onClose() {
           }
         },
       );
-      
+
       isSaving.value = false;
     }
   }
-
 }

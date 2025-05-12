@@ -17,7 +17,7 @@ class ServiceFormBinding extends Bindings {
     if (!Get.isRegistered<ApiProvider>()) {
       Get.lazyPut(() => ApiProvider(baseUrl: Constants.apiBaseUrl));
     }
-    
+
     if (!Get.isRegistered<ServicesRepository>()) {
       Get.lazyPut<ServicesRepository>(
         () => ServicesRepositoryImpl(
@@ -27,7 +27,7 @@ class ServiceFormBinding extends Bindings {
         ),
       );
     }
-    
+
     if (!Get.isRegistered<CategoriesRepository>()) {
       Get.lazyPut<CategoriesRepository>(
         () => CategoriesRepositoryImpl(
@@ -36,12 +36,12 @@ class ServiceFormBinding extends Bindings {
         ),
       );
     }
-    
+
     Get.lazyPut(() => CreateService(Get.find<ServicesRepository>()));
     Get.lazyPut(() => UpdateService(Get.find<ServicesRepository>()));
     Get.lazyPut(() => GetService(Get.find<ServicesRepository>()));
     Get.lazyPut(() => GetCategories(Get.find<CategoriesRepository>()));
-    
+
     Get.lazyPut(
       () => ServiceFormController(
         createService: Get.find<CreateService>(),

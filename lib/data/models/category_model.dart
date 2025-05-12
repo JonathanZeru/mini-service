@@ -21,7 +21,9 @@ class CategoryModel {
       name: json['name'] as String,
       description: json['description'] as String,
       imageUrl: json['imageUrl'] as String?,
-      listOfService: List<String>.from((json['listOfService'] as Iterable<dynamic>?) ?? []),
+      listOfService: List<String>.from(
+        (json['listOfService'] as Iterable<dynamic>?) ?? [],
+      ),
       createdAt: DateTime.parse(json['createdAt'] as String),
     );
   }

@@ -6,10 +6,7 @@ import 'package:service_booking_app/presentation/controllers/category_controller
 class CategoryServicesHeader extends StatelessWidget {
   final CategoryController controller;
 
-  const CategoryServicesHeader({
-    super.key,
-    required this.controller,
-  });
+  const CategoryServicesHeader({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -18,20 +15,23 @@ class CategoryServicesHeader extends StatelessWidget {
       children: [
         Text(
           'services_in_category'.tr,
-          style: Theme.of(context).textTheme.titleLarge?.copyWith(
-            fontWeight: FontWeight.bold,
-          ),
+          style: Theme.of(
+            context,
+          ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
         ),
-        Obx(() => controller.isAdmin
-            ? TextButton.icon(
-                onPressed: controller.goToCreateService,
-                icon: const Icon(Icons.add),
-                label: Text('add_service'.tr),
-                style: TextButton.styleFrom(
-                  foregroundColor: AppTheme.primaryColor,
-                ),
-              )
-            : const SizedBox.shrink()),
+        Obx(
+          () =>
+              controller.isAdmin
+                  ? TextButton.icon(
+                    onPressed: controller.goToCreateService,
+                    icon: const Icon(Icons.add),
+                    label: Text('add_service'.tr),
+                    style: TextButton.styleFrom(
+                      foregroundColor: AppTheme.primaryColor,
+                    ),
+                  )
+                  : const SizedBox.shrink(),
+        ),
       ],
     );
   }

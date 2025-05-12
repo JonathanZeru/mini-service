@@ -20,10 +20,12 @@ class ServiceFormButtons extends StatelessWidget {
         // Submit button
         Obx(() {
           final hasCategory = controller.selectedCategory.value != null;
-          final hasImage = controller.imageFile.value != null || 
-                          controller.imageUrl.value.isNotEmpty;
-          final isFormComplete = hasCategory && hasImage && controller.isFormValid;
-          
+          final hasImage =
+              controller.imageFile.value != null ||
+              controller.imageUrl.value.isNotEmpty;
+          final isFormComplete =
+              hasCategory && hasImage && controller.isFormValid;
+
           return CustomButton(
             text: isEditing ? 'update_service'.tr : 'create_service'.tr,
             isLoading: controller.isSaving.value,
@@ -34,7 +36,7 @@ class ServiceFormButtons extends StatelessWidget {
         }),
 
         const SizedBox(height: 16),
-        
+
         // Cancel button
         CustomButton(
           text: 'cancel'.tr,

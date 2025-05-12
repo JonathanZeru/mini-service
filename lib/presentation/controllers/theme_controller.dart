@@ -30,7 +30,7 @@ class ThemeController extends GetxController {
     themeMode.value = mode;
     Get.changeThemeMode(mode);
     HiveManager.saveThemeMode(_themeModeToString(mode));
-    
+
     AppTheme.updateSystemUIOverlayStyle(mode);
   }
 

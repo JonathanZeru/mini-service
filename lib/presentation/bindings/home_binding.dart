@@ -20,7 +20,7 @@ class HomeBinding extends Bindings {
     if (!Get.isRegistered<ApiProvider>()) {
       Get.lazyPut(() => ApiProvider(baseUrl: Constants.apiBaseUrl));
     }
-    
+
     Get.lazyPut<ServicesRepository>(
       () => ServicesRepositoryImpl(
         apiProvider: Get.find<ApiProvider>(),
@@ -28,28 +28,30 @@ class HomeBinding extends Bindings {
         baseUrl: Constants.apiBaseUrl,
       ),
     );
-    
+
     Get.lazyPut<CategoriesRepository>(
       () => CategoriesRepositoryImpl(
         apiProvider: Get.find<ApiProvider>(),
         endpoint: Constants.categoriesEndpoint,
       ),
     );
-    
+
     Get.lazyPut(() => GetServices(Get.find<ServicesRepository>()));
     Get.lazyPut(() => GetCategories(Get.find<CategoriesRepository>()));
     Get.lazyPut(() => DeleteCategory(Get.find<CategoriesRepository>()));
-    
+
     Get.find<AuthController>();
-    
+
     if (!Get.isRegistered<SettingsController>()) {
-      Get.put(SettingsController(
-        authController: Get.find<AuthController>(),
-        languageController: Get.find<LanguageController>(),
-        themeController: Get.find<ThemeController>(),
-      ));
+      Get.put(
+        SettingsController(
+          authController: Get.find<AuthController>(),
+          languageController: Get.find<LanguageController>(),
+          themeController: Get.find<ThemeController>(),
+        ),
+      );
     }
-    
+
     Get.lazyPut(
       () => HomeController(
         getServices: Get.find<GetServices>(),

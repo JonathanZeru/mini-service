@@ -26,22 +26,27 @@ class ServiceModel {
       id: json['id'] as String?,
       name: json['name'] as String,
       categoryId: json['categoryId'] as String,
-      price: (json['price'] is int)
-          ? (json['price'] as int).toDouble()
-          : double.parse(json['price'].toString()),
+      price:
+          (json['price'] is int)
+              ? (json['price'] as int).toDouble()
+              : double.parse(json['price'].toString()),
       imageUrl: json['imageUrl'] as String?,
-      availability: json['availability'] is bool 
-          ? json['availability'] as bool
-          : json['availability'].toString().toLowerCase() == 'true',
-      duration: json['duration'] is int 
-          ? json['duration'] as int
-          : int.parse(json['duration'].toString()),
-      rating: (json['rating'] is int)
-          ? (json['rating'] as int).toDouble()
-          : double.parse(json['rating'].toString()),
-      createdAt: json['createdAt'] is DateTime 
-          ? json['createdAt'] as DateTime
-          : DateTime.parse(json['createdAt'].toString()),
+      availability:
+          json['availability'] is bool
+              ? json['availability'] as bool
+              : json['availability'].toString().toLowerCase() == 'true',
+      duration:
+          json['duration'] is int
+              ? json['duration'] as int
+              : int.parse(json['duration'].toString()),
+      rating:
+          (json['rating'] is int)
+              ? (json['rating'] as int).toDouble()
+              : double.parse(json['rating'].toString()),
+      createdAt:
+          json['createdAt'] is DateTime
+              ? json['createdAt'] as DateTime
+              : DateTime.parse(json['createdAt'].toString()),
     );
   }
 

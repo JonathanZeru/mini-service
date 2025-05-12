@@ -33,10 +33,7 @@ class UIHelpers {
         title: Text(title),
         content: Text(message),
         actions: [
-          TextButton(
-            onPressed: () => Get.back(),
-            child: Text(cancelText),
-          ),
+          TextButton(onPressed: () => Get.back(), child: Text(cancelText)),
           TextButton(
             onPressed: () {
               Get.back();
@@ -45,7 +42,8 @@ class UIHelpers {
             child: Text(
               confirmText,
               style: TextStyle(
-                color: confirmText.toLowerCase() == 'delete' ? Colors.red : null,
+                color:
+                    confirmText.toLowerCase() == 'delete' ? Colors.red : null,
               ),
             ),
           ),

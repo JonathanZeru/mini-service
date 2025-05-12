@@ -39,7 +39,7 @@ class SettingsController extends GetxController {
 
   Future<void> clearCache() async {
     isLoading.value = true;
-    
+
     try {
       await HiveManager.clearAll();
       UIHelpers.showSnackbar(

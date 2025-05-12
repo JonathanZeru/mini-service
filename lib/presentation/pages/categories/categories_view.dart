@@ -25,13 +25,11 @@ class CategoriesView extends GetView<HomeController> {
         children: [
           // Search bar
           CategoriesSearchBar(controller: controller),
-          
+
           // Categories list
-          Expanded(
-            child: CategoriesList(controller: controller),
-          ),
+          Expanded(child: CategoriesList(controller: controller)),
         ],
-      )
+      ),
     );
   }
 }

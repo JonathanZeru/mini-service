@@ -41,12 +41,12 @@ class CategoriesController extends GetxController {
       categories.clear();
       hasMoreCategories.value = true;
     }
-    
+
     final result = await getCategories(
       page: currentPage.value,
       limit: categoriesPerPage,
     );
-    
+
     result.fold(
       (failure) {
         UIHelpers.showSnackbar(
@@ -61,16 +61,16 @@ class CategoriesController extends GetxController {
         } else {
           categories.addAll(data);
         }
-        
+
         // Check if we've reached the end of the list
         if (data.length < categoriesPerPage) {
           hasMoreCategories.value = false;
         }
-        
+
         filterCategories();
       },
     );
-    
+
     if (refresh) {
       isLoading.value = false;
     } else {
@@ -80,7 +80,7 @@ class CategoriesController extends GetxController {
 
   Future<void> loadMoreCategories() async {
     if (isLoadingMore.value || !hasMoreCategories.value) return;
-    
+
     isLoadingMore.value = true;
     currentPage.value++;
     await fetchCategories(refresh: false);
@@ -88,11 +88,12 @@ class CategoriesController extends GetxController {
 
   void filterCategories() {
     final query = searchQuery.value.toLowerCase();
-    
-    filteredCategories.value = categories.where((category) {
-      return category.name.toLowerCase().contains(query) ||
-          category.description.toLowerCase().contains(query);
-    }).toList();
+
+    filteredCategories.value =
+        categories.where((category) {
+          return category.name.toLowerCase().contains(query) ||
+              category.description.toLowerCase().contains(query);
+        }).toList();
   }
 
   void updateSearchQuery(String query) {

@@ -14,7 +14,14 @@ abstract class ServicesRepository {
     int? limit,
   });
   Future<Either<Failure, ServiceModel>> getService(String id);
-  Future<Either<Failure, ServiceModel>> createService(ServiceModel service, File? imageFile);
-  Future<Either<Failure, ServiceModel>> updateService(String id, ServiceModel service, File? imageFile);
+  Future<Either<Failure, ServiceModel>> createService(
+    ServiceModel service,
+    File? imageFile,
+  );
+  Future<Either<Failure, ServiceModel>> updateService(
+    String id,
+    ServiceModel service,
+    File? imageFile,
+  );
   Future<Either<Failure, bool>> deleteService(String id);
 }

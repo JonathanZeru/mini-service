@@ -8,7 +8,11 @@ class Register {
 
   Register(this.repository);
 
-  Future<Either<Failure, UserModel>> call(String username, String email, String password) async {
+  Future<Either<Failure, UserModel>> call(
+    String username,
+    String email,
+    String password,
+  ) async {
     return await repository.register(username, email, password);
   }
 }

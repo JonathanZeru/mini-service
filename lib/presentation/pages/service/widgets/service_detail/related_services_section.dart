@@ -8,18 +8,18 @@ class RelatedServicesSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
-    
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           'related_services'.tr,
-          style: Theme.of(context).textTheme.titleLarge?.copyWith(
-            fontWeight: FontWeight.bold,
-          ),
+          style: Theme.of(
+            context,
+          ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 16),
-        
+
         // Placeholder for related services
         SizedBox(
           height: 150,
@@ -33,15 +33,14 @@ class RelatedServicesSection extends StatelessWidget {
                 child: SizedBox(
                   width: 150,
                   child: Shimmer.fromColors(
-                    baseColor: isDarkMode ? Colors.grey[800]! : Colors.grey[300]!,
-                    highlightColor: isDarkMode ? Colors.grey[700]! : Colors.grey[100]!,
+                    baseColor:
+                        isDarkMode ? Colors.grey[800]! : Colors.grey[300]!,
+                    highlightColor:
+                        isDarkMode ? Colors.grey[700]! : Colors.grey[100]!,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Container(
-                          height: 100,
-                          color: Colors.white,
-                        ),
+                        Container(height: 100, color: Colors.white),
                         const SizedBox(height: 8),
                         Container(
                           height: 12,

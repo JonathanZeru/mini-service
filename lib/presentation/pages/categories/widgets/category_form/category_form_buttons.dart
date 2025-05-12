@@ -18,15 +18,19 @@ class CategoryFormButtons extends StatelessWidget {
     return Column(
       children: [
         // Submit button
-        Obx(() => CustomButton(
-          text: isEditing ? 'update_category'.tr : 'create_category'.tr,
-          isLoading: controller.isSaving.value,
-          onPressed: controller.saveCategory,
-          width: double.infinity,
-          isEnabled: controller.isFormValid, // Use the isFormValid property to enable/disable the button
-        )),
+        Obx(
+          () => CustomButton(
+            text: isEditing ? 'update_category'.tr : 'create_category'.tr,
+            isLoading: controller.isSaving.value,
+            onPressed: controller.saveCategory,
+            width: double.infinity,
+            isEnabled:
+                controller
+                    .isFormValid, // Use the isFormValid property to enable/disable the button
+          ),
+        ),
         const SizedBox(height: 16),
-        
+
         // Cancel button
         CustomButton(
           text: 'cancel'.tr,

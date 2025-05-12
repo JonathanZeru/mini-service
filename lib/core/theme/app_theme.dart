@@ -6,24 +6,24 @@ class AppTheme {
   static const Color primaryColor = Color(0xFF2E7D32); // Green 800
   static const Color primaryLightColor = Color(0xFF60AD5E); // Green 600
   static const Color primaryDarkColor = Color(0xFF005005); // Green 900
-  
+
   // Secondary color
   static const Color secondaryColor = Color(0xFF00796B); // Teal 700
   static const Color secondaryLightColor = Color(0xFF48A999); // Teal 500
   static const Color secondaryDarkColor = Color(0xFF004C40); // Teal 900
-  
+
   // Background colors
   static const Color lightBackgroundColor = Color(0xFFF5F5F5);
   static const Color darkBackgroundColor = Color(0xFF121212);
-  
+
   // Surface colors
   static const Color lightSurfaceColor = Colors.white;
   static const Color darkSurfaceColor = Color(0xFF1E1E1E);
-  
+
   // Error colors
   static const Color errorColor = Color(0xFFB00020);
   static const Color darkErrorColor = Color(0xFFCF6679);
-  
+
   // Text colors
   static const Color lightTextColor = Color(0xFF212121);
   static const Color lightSecondaryTextColor = Color(0xFF757575);
@@ -68,22 +68,15 @@ class AppTheme {
     cardTheme: CardTheme(
       color: lightSurfaceColor,
       elevation: 2,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         backgroundColor: primaryColor,
         foregroundColor: Colors.white,
         elevation: 2,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
-        ),
-        padding: const EdgeInsets.symmetric(
-          horizontal: 16,
-          vertical: 12,
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         textStyle: const TextStyle(
           fontFamily: 'Poppins',
           fontWeight: FontWeight.w500,
@@ -93,13 +86,8 @@ class AppTheme {
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
         foregroundColor: primaryColor,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
-        ),
-        padding: const EdgeInsets.symmetric(
-          horizontal: 16,
-          vertical: 12,
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         textStyle: const TextStyle(
           fontFamily: 'Poppins',
           fontWeight: FontWeight.w500,
@@ -110,13 +98,8 @@ class AppTheme {
       style: OutlinedButton.styleFrom(
         foregroundColor: primaryColor,
         side: const BorderSide(color: primaryColor),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
-        ),
-        padding: const EdgeInsets.symmetric(
-          horizontal: 16,
-          vertical: 12,
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         textStyle: const TextStyle(
           fontFamily: 'Poppins',
           fontWeight: FontWeight.w500,
@@ -142,10 +125,7 @@ class AppTheme {
         borderRadius: BorderRadius.circular(8),
         borderSide: const BorderSide(color: errorColor),
       ),
-      contentPadding: const EdgeInsets.symmetric(
-        horizontal: 16,
-        vertical: 16,
-      ),
+      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
       // Set Poppins for input labels and hints
       labelStyle: const TextStyle(
         fontFamily: 'Poppins',
@@ -155,27 +135,19 @@ class AppTheme {
         fontFamily: 'Poppins',
         color: lightSecondaryTextColor,
       ),
-      errorStyle: const TextStyle(
-        fontFamily: 'Poppins',
-        color: errorColor,
-      ),
+      errorStyle: const TextStyle(fontFamily: 'Poppins', color: errorColor),
     ),
     chipTheme: ChipThemeData(
       backgroundColor: Colors.grey[200],
       selectedColor: primaryLightColor,
       disabledColor: Colors.grey[300],
-      labelStyle: const TextStyle(
-        fontFamily: 'Poppins',
-        color: lightTextColor,
-      ),
+      labelStyle: const TextStyle(fontFamily: 'Poppins', color: lightTextColor),
       secondaryLabelStyle: const TextStyle(
         fontFamily: 'Poppins',
         color: Colors.white,
       ),
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 0),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
     ),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       backgroundColor: lightSurfaceColor,
@@ -184,14 +156,8 @@ class AppTheme {
       type: BottomNavigationBarType.fixed,
       elevation: 8,
       // Set Poppins for bottom navigation labels
-      selectedLabelStyle: TextStyle(
-        fontFamily: 'Poppins',
-        fontSize: 12,
-      ),
-      unselectedLabelStyle: TextStyle(
-        fontFamily: 'Poppins',
-        fontSize: 12,
-      ),
+      selectedLabelStyle: TextStyle(fontFamily: 'Poppins', fontSize: 12),
+      unselectedLabelStyle: TextStyle(fontFamily: 'Poppins', fontSize: 12),
     ),
     dividerTheme: const DividerThemeData(
       color: Color(0xFFE0E0E0),
@@ -239,14 +205,8 @@ class AppTheme {
         color: lightTextColor,
         fontWeight: FontWeight.w500,
       ),
-      bodyLarge: TextStyle(
-        fontFamily: 'Poppins',
-        color: lightTextColor,
-      ),
-      bodyMedium: TextStyle(
-        fontFamily: 'Poppins',
-        color: lightTextColor,
-      ),
+      bodyLarge: TextStyle(fontFamily: 'Poppins', color: lightTextColor),
+      bodyMedium: TextStyle(fontFamily: 'Poppins', color: lightTextColor),
       bodySmall: TextStyle(
         fontFamily: 'Poppins',
         color: lightSecondaryTextColor,
@@ -297,22 +257,15 @@ class AppTheme {
     cardTheme: CardTheme(
       color: darkSurfaceColor,
       elevation: 2,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         backgroundColor: primaryColor,
         foregroundColor: Colors.white,
         elevation: 2,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
-        ),
-        padding: const EdgeInsets.symmetric(
-          horizontal: 16,
-          vertical: 12,
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         textStyle: const TextStyle(
           fontFamily: 'Poppins',
           fontWeight: FontWeight.w500,
@@ -322,13 +275,8 @@ class AppTheme {
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
         foregroundColor: primaryColor,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
-        ),
-        padding: const EdgeInsets.symmetric(
-          horizontal: 16,
-          vertical: 12,
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         textStyle: const TextStyle(
           fontFamily: 'Poppins',
           fontWeight: FontWeight.w500,
@@ -339,13 +287,8 @@ class AppTheme {
       style: OutlinedButton.styleFrom(
         foregroundColor: primaryColor,
         side: const BorderSide(color: primaryColor),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
-        ),
-        padding: const EdgeInsets.symmetric(
-          horizontal: 16,
-          vertical: 12,
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         textStyle: const TextStyle(
           fontFamily: 'Poppins',
           fontWeight: FontWeight.w500,
@@ -371,10 +314,7 @@ class AppTheme {
         borderRadius: BorderRadius.circular(8),
         borderSide: const BorderSide(color: darkErrorColor),
       ),
-      contentPadding: const EdgeInsets.symmetric(
-        horizontal: 16,
-        vertical: 16,
-      ),
+      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
       // Set Poppins for input labels and hints
       labelStyle: const TextStyle(
         fontFamily: 'Poppins',
@@ -384,27 +324,19 @@ class AppTheme {
         fontFamily: 'Poppins',
         color: darkSecondaryTextColor,
       ),
-      errorStyle: const TextStyle(
-        fontFamily: 'Poppins',
-        color: darkErrorColor,
-      ),
+      errorStyle: const TextStyle(fontFamily: 'Poppins', color: darkErrorColor),
     ),
     chipTheme: ChipThemeData(
       backgroundColor: const Color(0xFF2C2C2C),
       selectedColor: primaryColor,
       disabledColor: const Color(0xFF3C3C3C),
-      labelStyle: const TextStyle(
-        fontFamily: 'Poppins',
-        color: darkTextColor,
-      ),
+      labelStyle: const TextStyle(fontFamily: 'Poppins', color: darkTextColor),
       secondaryLabelStyle: const TextStyle(
         fontFamily: 'Poppins',
         color: Colors.white,
       ),
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 0),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
     ),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       backgroundColor: darkSurfaceColor,
@@ -413,14 +345,8 @@ class AppTheme {
       type: BottomNavigationBarType.fixed,
       elevation: 8,
       // Set Poppins for bottom navigation labels
-      selectedLabelStyle: TextStyle(
-        fontFamily: 'Poppins',
-        fontSize: 12,
-      ),
-      unselectedLabelStyle: TextStyle(
-        fontFamily: 'Poppins',
-        fontSize: 12,
-      ),
+      selectedLabelStyle: TextStyle(fontFamily: 'Poppins', fontSize: 12),
+      unselectedLabelStyle: TextStyle(fontFamily: 'Poppins', fontSize: 12),
     ),
     dividerTheme: const DividerThemeData(
       color: Color(0xFF3C3C3C),
@@ -468,14 +394,8 @@ class AppTheme {
         color: darkTextColor,
         fontWeight: FontWeight.w500,
       ),
-      bodyLarge: TextStyle(
-        fontFamily: 'Poppins',
-        color: darkTextColor,
-      ),
-      bodyMedium: TextStyle(
-        fontFamily: 'Poppins',
-        color: darkTextColor,
-      ),
+      bodyLarge: TextStyle(fontFamily: 'Poppins', color: darkTextColor),
+      bodyMedium: TextStyle(fontFamily: 'Poppins', color: darkTextColor),
       bodySmall: TextStyle(
         fontFamily: 'Poppins',
         color: darkSecondaryTextColor,
@@ -489,15 +409,19 @@ class AppTheme {
   );
 
   static void updateSystemUIOverlayStyle(ThemeMode mode) {
-    final isDark = mode == ThemeMode.dark || 
-        (mode == ThemeMode.system && WidgetsBinding.instance.platformDispatcher.platformBrightness == Brightness.dark);
-    
+    final isDark =
+        mode == ThemeMode.dark ||
+        (mode == ThemeMode.system &&
+            WidgetsBinding.instance.platformDispatcher.platformBrightness ==
+                Brightness.dark);
+
     SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
         statusBarIconBrightness: isDark ? Brightness.light : Brightness.dark,
         systemNavigationBarColor: isDark ? darkSurfaceColor : lightSurfaceColor,
-        systemNavigationBarIconBrightness: isDark ? Brightness.light : Brightness.dark,
+        systemNavigationBarIconBrightness:
+            isDark ? Brightness.light : Brightness.dark,
       ),
     );
   }

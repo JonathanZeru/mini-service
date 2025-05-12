@@ -11,10 +11,10 @@ class LoginController extends GetxController {
   final formKey = GlobalKey<FormState>();
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  
+
   final RxBool isPasswordVisible = false.obs;
   final RxBool rememberMe = false.obs;
-  
+
   // Add this for form validation tracking
   final RxBool _isFormValid = false.obs;
   bool get isFormValid => _isFormValid.value;
@@ -22,7 +22,7 @@ class LoginController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    
+
     // Add listeners to text controllers
     usernameController.addListener(checkFormValidity);
     passwordController.addListener(checkFormValidity);
@@ -33,7 +33,7 @@ class LoginController extends GetxController {
     // Remove listeners to prevent memory leaks
     usernameController.removeListener(checkFormValidity);
     passwordController.removeListener(checkFormValidity);
-    
+
     usernameController.dispose();
     passwordController.dispose();
     super.onClose();
@@ -87,7 +87,7 @@ class LoginController extends GetxController {
     if (formKey.currentState?.validate() ?? false) {
       final username = usernameController.text.trim();
       final password = passwordController.text.trim();
-      
+
       await authController.loginUser(username, password);
     }
   }

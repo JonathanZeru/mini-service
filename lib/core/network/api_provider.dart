@@ -101,26 +101,34 @@ class ApiProvider extends GetConnect {
         return response.body;
       case 400:
         throw BadRequestException(
-            message: response.body != null
-                ? json.encode(response.body)
-                : 'Bad request');
+          message:
+              response.body != null
+                  ? json.encode(response.body)
+                  : 'Bad request',
+        );
       case 401:
       case 403:
         throw UnauthorizedException(
-            message: response.body != null
-                ? json.encode(response.body)
-                : 'Unauthorized');
+          message:
+              response.body != null
+                  ? json.encode(response.body)
+                  : 'Unauthorized',
+        );
       case 404:
         throw NotFoundException(
-            message: response.body != null
-                ? json.encode(response.body)
-                : 'Resource not found');
+          message:
+              response.body != null
+                  ? json.encode(response.body)
+                  : 'Resource not found',
+        );
       case 500:
       default:
         throw ServerException(
-            message: response.body != null
-                ? json.encode(response.body)
-                : 'Server error');
+          message:
+              response.body != null
+                  ? json.encode(response.body)
+                  : 'Server error',
+        );
     }
   }
 }

@@ -50,19 +50,21 @@ class LoginPage extends GetView<LoginController> {
                     ),
                   ),
                   const SizedBox(height: 24),
-                  
+
                   // App name
                   Center(
                     child: Text(
                       'app_name'.tr,
-                      style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                      style: Theme.of(
+                        context,
+                      ).textTheme.headlineMedium?.copyWith(
                         fontWeight: FontWeight.bold,
                         color: AppTheme.primaryColor,
                       ),
                     ),
                   ),
                   const SizedBox(height: 48),
-                  
+
                   // Username field
                   TextFormField(
                     controller: controller.usernameController,
@@ -75,38 +77,42 @@ class LoginPage extends GetView<LoginController> {
                     textInputAction: TextInputAction.next,
                   ),
                   const SizedBox(height: 16),
-                  
+
                   // Password field
-                  Obx(() => TextFormField(
-                    controller: controller.passwordController,
-                    decoration: InputDecoration(
-                      labelText: 'password'.tr,
-                      prefixIcon: const Icon(Icons.lock),
-                      suffixIcon: IconButton(
-                        icon: Icon(
-                          controller.isPasswordVisible.value
-                              ? Icons.visibility_off
-                              : Icons.visibility,
+                  Obx(
+                    () => TextFormField(
+                      controller: controller.passwordController,
+                      decoration: InputDecoration(
+                        labelText: 'password'.tr,
+                        prefixIcon: const Icon(Icons.lock),
+                        suffixIcon: IconButton(
+                          icon: Icon(
+                            controller.isPasswordVisible.value
+                                ? Icons.visibility_off
+                                : Icons.visibility,
+                          ),
+                          onPressed: controller.togglePasswordVisibility,
                         ),
-                        onPressed: controller.togglePasswordVisibility,
+                        border: const OutlineInputBorder(),
                       ),
-                      border: const OutlineInputBorder(),
+                      obscureText: !controller.isPasswordVisible.value,
+                      validator: controller.validatePassword,
+                      textInputAction: TextInputAction.done,
+                      onFieldSubmitted: (_) => controller.login(),
                     ),
-                    obscureText: !controller.isPasswordVisible.value,
-                    validator: controller.validatePassword,
-                    textInputAction: TextInputAction.done,
-                    onFieldSubmitted: (_) => controller.login(),
-                  )),
+                  ),
                   const SizedBox(height: 8),
-                  
+
                   // Remember me checkbox
                   Row(
                     children: [
-                      Obx(() => Checkbox(
-                        value: controller.rememberMe.value,
-                        onChanged: controller.toggleRememberMe,
-                        activeColor: AppTheme.primaryColor,
-                      )),
+                      Obx(
+                        () => Checkbox(
+                          value: controller.rememberMe.value,
+                          onChanged: controller.toggleRememberMe,
+                          activeColor: AppTheme.primaryColor,
+                        ),
+                      ),
                       Text('Remember me'.tr),
                       const Spacer(),
                       TextButton(
@@ -116,17 +122,19 @@ class LoginPage extends GetView<LoginController> {
                     ],
                   ),
                   const SizedBox(height: 24),
-                  
+
                   // Login button - Updated with isEnabled property
-                  Obx(() => CustomButton(
-                    text: 'login'.tr,
-                    isLoading: controller.authController.isLoading.value,
-                    onPressed: controller.login,
-                    isEnabled: controller.isFormValid, // Add this line
-                    width: double.infinity,
-                  )),
+                  Obx(
+                    () => CustomButton(
+                      text: 'login'.tr,
+                      isLoading: controller.authController.isLoading.value,
+                      onPressed: controller.login,
+                      isEnabled: controller.isFormValid, // Add this line
+                      width: double.infinity,
+                    ),
+                  ),
                   const SizedBox(height: 16),
-                  
+
                   // Register link
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,

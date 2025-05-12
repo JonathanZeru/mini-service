@@ -60,7 +60,7 @@ class AppTranslations extends Translations {
       'category_not_found': 'Category Not Found',
       'info': 'Information',
       'load_more': 'Load More',
-      
+
       // Auth
       'login': 'Login',
       'register': 'Register',
@@ -78,7 +78,7 @@ class AppTranslations extends Translations {
       'login_required': 'Please login to continue',
       'admin_login': 'Admin Login',
       'user_login': 'User Login',
-      
+
       // Home
       'home': 'Home',
       'categories': 'Categories',
@@ -90,18 +90,19 @@ class AppTranslations extends Translations {
       'featured_services': 'Featured Services',
       'popular_categories': 'Popular Categories',
       'see_all': 'See All',
-      
+
       // Categories
       'category_name': 'Category Name',
       'category_description': 'Category Description',
       'add_category': 'Add Category',
       'edit_category': 'Edit Category',
       'delete_category': 'Delete Category',
-      'delete_category_confirm': 'Are you sure you want to delete this category?',
+      'delete_category_confirm':
+          'Are you sure you want to delete this category?',
       'category_created': 'Category created successfully',
       'category_updated': 'Category updated successfully',
       'category_deleted': 'Category deleted successfully',
-      
+
       // Services
       'service_name': 'Service Name',
       'service_price': 'Price',
@@ -122,7 +123,7 @@ class AppTranslations extends Translations {
       'price_range': 'Price Range',
       'min_rating': 'Minimum Rating',
       'available_only': 'Available Only',
-      
+
       // Profile
       'edit_profile': 'Edit Profile',
       'change_password': 'Change Password',
@@ -138,7 +139,7 @@ class AppTranslations extends Translations {
       'help': 'Help',
       'terms': 'Terms & Conditions',
       'privacy': 'Privacy Policy',
-      
+
       // Settings
       'app_settings': 'App Settings',
       'account_settings': 'Account Settings',
@@ -207,7 +208,7 @@ class AppTranslations extends Translations {
       'category_not_found': 'ምድብ አልተገኘም',
       'info': 'መረጃ',
       'load_more': 'ተጨማሪ ጫን',
-      
+
       // Auth
       'login': 'ግባ',
       'register': 'ተመዝገብ',
@@ -225,7 +226,7 @@ class AppTranslations extends Translations {
       'login_required': 'እባክዎ ለመቀጠል ይግቡ',
       'admin_login': 'የአስተዳዳሪ መግቢያ',
       'user_login': 'የተጠቃሚ መግቢያ',
-      
+
       // Home
       'home': 'ቤት',
       'categories': 'ምድቦች',
@@ -237,7 +238,7 @@ class AppTranslations extends Translations {
       'featured_services': 'ተለይተው የቀረቡ አገልግሎቶች',
       'popular_categories': 'ታዋቂ ምድቦች',
       'see_all': 'ሁሉንም ይመልከቱ',
-      
+
       // Categories
       'category_name': 'የምድብ ስም',
       'category_description': 'የምድብ መግለጫ',
@@ -248,7 +249,7 @@ class AppTranslations extends Translations {
       'category_created': 'ምድብ በተሳካ ሁኔታ ተፈጥሯል',
       'category_updated': 'ምድብ በተሳካ ሁኔታ ተዘምኗል',
       'category_deleted': 'ምድብ በተሳካ ሁኔታ ተሰርዟል',
-      
+
       // Services
       'service_name': 'የአገልግሎት ስም',
       'service_price': 'ዋጋ',
@@ -269,7 +270,7 @@ class AppTranslations extends Translations {
       'price_range': 'የዋጋ ክልል',
       'min_rating': 'ዝቅተኛ ደረጃ',
       'available_only': 'የሚገኙ ብቻ',
-      
+
       // Profile
       'edit_profile': 'መገለጫ አስተካክል',
       'change_password': 'የይለፍ ቃል ቀይር',
@@ -285,7 +286,7 @@ class AppTranslations extends Translations {
       'help': 'እገዛ',
       'terms': 'የአገልግሎት ውሎች',
       'privacy': 'የግላዊነት ፖሊሲ',
-      
+
       // Settings
       'app_settings': 'የመተግበሪያ ቅንብሮች',
       'account_settings': 'የመለያ ቅንብሮች',

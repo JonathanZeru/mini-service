@@ -5,10 +5,7 @@ import 'package:service_booking_app/presentation/controllers/settings_controller
 class LanguageDialog extends StatelessWidget {
   final SettingsController controller;
 
-  const LanguageDialog({
-    super.key,
-    required this.controller,
-  });
+  const LanguageDialog({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -16,10 +13,13 @@ class LanguageDialog extends StatelessWidget {
       title: Text('language_settings'.tr),
       content: Column(
         mainAxisSize: MainAxisSize.min,
-        children: controller.languageController.availableLanguages
-            .map((language) => ListTile(
-                  title: Text(language['name']!),
-                  trailing: Obx(() => Radio<String>(
+        children:
+            controller.languageController.availableLanguages
+                .map(
+                  (language) => ListTile(
+                    title: Text(language['name']!),
+                    trailing: Obx(
+                      () => Radio<String>(
                         value: language['code']!,
                         groupValue:
                             controller.languageController.currentLanguage.value,
@@ -29,13 +29,15 @@ class LanguageDialog extends StatelessWidget {
                             Navigator.pop(context);
                           }
                         },
-                      )),
-                  onTap: () {
-                    controller.changeLanguage(language['code']!);
-                    Navigator.pop(context);
-                  },
-                ))
-            .toList(),
+                      ),
+                    ),
+                    onTap: () {
+                      controller.changeLanguage(language['code']!);
+                      Navigator.pop(context);
+                    },
+                  ),
+                )
+                .toList(),
       ),
       actions: [
         TextButton(

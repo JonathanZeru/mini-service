@@ -5,10 +5,7 @@ import 'package:service_booking_app/presentation/controllers/settings_controller
 class ThemeDialog extends StatelessWidget {
   final SettingsController controller;
 
-  const ThemeDialog({
-    super.key,
-    required this.controller,
-  });
+  const ThemeDialog({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -19,16 +16,18 @@ class ThemeDialog extends StatelessWidget {
         children: [
           ListTile(
             title: Text('light_mode'.tr),
-            trailing: Obx(() => Radio<ThemeMode>(
-                  value: ThemeMode.light,
-                  groupValue: controller.themeController.themeMode.value,
-                  onChanged: (value) {
-                    if (value != null) {
-                      controller.changeThemeMode(value);
-                      Navigator.pop(context);
-                    }
-                  },
-                )),
+            trailing: Obx(
+              () => Radio<ThemeMode>(
+                value: ThemeMode.light,
+                groupValue: controller.themeController.themeMode.value,
+                onChanged: (value) {
+                  if (value != null) {
+                    controller.changeThemeMode(value);
+                    Navigator.pop(context);
+                  }
+                },
+              ),
+            ),
             onTap: () {
               controller.changeThemeMode(ThemeMode.light);
               Navigator.pop(context);
@@ -36,16 +35,18 @@ class ThemeDialog extends StatelessWidget {
           ),
           ListTile(
             title: Text('dark_mode'.tr),
-            trailing: Obx(() => Radio<ThemeMode>(
-                  value: ThemeMode.dark,
-                  groupValue: controller.themeController.themeMode.value,
-                  onChanged: (value) {
-                    if (value != null) {
-                      controller.changeThemeMode(value);
-                      Navigator.pop(context);
-                    }
-                  },
-                )),
+            trailing: Obx(
+              () => Radio<ThemeMode>(
+                value: ThemeMode.dark,
+                groupValue: controller.themeController.themeMode.value,
+                onChanged: (value) {
+                  if (value != null) {
+                    controller.changeThemeMode(value);
+                    Navigator.pop(context);
+                  }
+                },
+              ),
+            ),
             onTap: () {
               controller.changeThemeMode(ThemeMode.dark);
               Navigator.pop(context);
@@ -53,16 +54,18 @@ class ThemeDialog extends StatelessWidget {
           ),
           ListTile(
             title: Text('system_theme'.tr),
-            trailing: Obx(() => Radio<ThemeMode>(
-                  value: ThemeMode.system,
-                  groupValue: controller.themeController.themeMode.value,
-                  onChanged: (value) {
-                    if (value != null) {
-                      controller.changeThemeMode(value);
-                      Navigator.pop(context);
-                    }
-                  },
-                )),
+            trailing: Obx(
+              () => Radio<ThemeMode>(
+                value: ThemeMode.system,
+                groupValue: controller.themeController.themeMode.value,
+                onChanged: (value) {
+                  if (value != null) {
+                    controller.changeThemeMode(value);
+                    Navigator.pop(context);
+                  }
+                },
+              ),
+            ),
             onTap: () {
               controller.changeThemeMode(ThemeMode.system);
               Navigator.pop(context);

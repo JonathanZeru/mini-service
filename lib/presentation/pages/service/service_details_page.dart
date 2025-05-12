@@ -27,11 +27,8 @@ class ServiceDetailsPage extends GetView<ServiceController> {
         return CustomScrollView(
           slivers: [
             // App bar with image
-            ServiceHeader(
-              service: service,
-              controller: controller,
-            ),
-            
+            ServiceHeader(service: service, controller: controller),
+
             // Service details
             SliverToBoxAdapter(
               child: Padding(
@@ -45,11 +42,11 @@ class ServiceDetailsPage extends GetView<ServiceController> {
                       controller: controller,
                     ),
                     const SizedBox(height: 32),
-                    
+
                     // Action buttons
                     const ServiceActionButtons(),
                     const SizedBox(height: 32),
-                    
+
                     // Related services
                     const RelatedServicesSection(),
                   ],

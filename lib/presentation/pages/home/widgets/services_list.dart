@@ -10,10 +10,7 @@ import 'package:service_booking_app/presentation/widgets/loading_indicator.dart'
 class ServicesList extends StatelessWidget {
   final HomeController controller;
 
-  const ServicesList({
-    super.key,
-    required this.controller,
-  });
+  const ServicesList({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +24,7 @@ class ServicesList extends StatelessWidget {
           ),
         );
       }
-      
+
       if (controller.filteredServices.isEmpty) {
         return EmptyState(
           icon: Icons.search_off_rounded,
@@ -37,7 +34,7 @@ class ServicesList extends StatelessWidget {
           onButtonPressed: controller.resetFilters,
         );
       }
-      
+
       return NotificationListener<ScrollNotification>(
         onNotification: (ScrollNotification scrollInfo) {
           if (scrollInfo.metrics.pixels == scrollInfo.metrics.maxScrollExtent &&
@@ -50,14 +47,18 @@ class ServicesList extends StatelessWidget {
         child: AnimationLimiter(
           child: ListView.builder(
             padding: const EdgeInsets.all(16),
-            itemCount: controller.filteredServices.length + 
-                      (controller.isLoadingMore.value || controller.hasMoreServices.value ? 1 : 0),
+            itemCount:
+                controller.filteredServices.length +
+                (controller.isLoadingMore.value ||
+                        controller.hasMoreServices.value
+                    ? 1
+                    : 0),
             itemBuilder: (context, index) {
               // Show loading indicator at the bottom
               if (index == controller.filteredServices.length) {
                 return _buildLoadMoreIndicator();
               }
-              
+
               return _buildServiceItem(context, index);
             },
           ),
@@ -70,12 +71,13 @@ class ServicesList extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 16.0),
       child: Center(
-        child: controller.isLoadingMore.value
-            ? const LoadingIndicator(size: 50)
-            : TextButton(
-                onPressed: controller.loadMoreServices,
-                child: Text('load_more'.tr),
-              ),
+        child:
+            controller.isLoadingMore.value
+                ? const LoadingIndicator(size: 50)
+                : TextButton(
+                  onPressed: controller.loadMoreServices,
+                  child: Text('load_more'.tr),
+                ),
       ),
     );
   }
@@ -83,10 +85,11 @@ class ServicesList extends StatelessWidget {
   Widget _buildServiceItem(BuildContext context, int index) {
     final service = controller.filteredServices[index];
     // Find category name
-    final category = controller.categories
-        .firstWhereOrNull((c) => c.id == service.categoryId);
+    final category = controller.categories.firstWhereOrNull(
+      (c) => c.id == service.categoryId,
+    );
     final categoryName = category?.name ?? 'unknown'.tr;
-    
+
     return AnimationConfiguration.staggeredList(
       position: index,
       duration: const Duration(milliseconds: 375),

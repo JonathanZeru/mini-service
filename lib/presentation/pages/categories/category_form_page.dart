@@ -32,11 +32,11 @@ class CategoryFormPage extends GetView<CategoryFormController> {
                 // Category icon (placeholder)
                 const CategoryIconSection(),
                 const SizedBox(height: 24),
-                
+
                 // Form fields
                 CategoryFormFields(controller: controller),
                 const SizedBox(height: 32),
-                
+
                 // Form buttons
                 CategoryFormButtons(
                   controller: controller,

@@ -10,7 +10,7 @@ class SettingsBinding extends Bindings {
     Get.find<AuthController>();
     Get.find<LanguageController>();
     Get.find<ThemeController>();
-    
+
     Get.lazyPut(
       () => SettingsController(
         authController: Get.find<AuthController>(),

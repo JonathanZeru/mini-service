@@ -10,19 +10,19 @@ import 'package:service_booking_app/presentation/routes/app_pages.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  
+
   // Initialize Hive
   await HiveManager.init();
-  
+
   // Set preferred orientations
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
-  
+
   // Set system UI overlay style
   AppTheme.updateSystemUIOverlayStyle(ThemeMode.system);
-  
+
   runApp(const MyApp());
 }
 

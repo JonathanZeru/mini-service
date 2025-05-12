@@ -14,19 +14,19 @@ class CategoriesBinding extends Bindings {
     if (!Get.isRegistered<ApiProvider>()) {
       Get.lazyPut(() => ApiProvider(baseUrl: Constants.apiBaseUrl));
     }
-    
+
     Get.lazyPut<CategoriesRepository>(
       () => CategoriesRepositoryImpl(
         apiProvider: Get.find<ApiProvider>(),
         endpoint: Constants.categoriesEndpoint,
       ),
     );
-    
+
     Get.lazyPut(() => GetCategories(Get.find<CategoriesRepository>()));
     Get.lazyPut(() => DeleteCategory(Get.find<CategoriesRepository>()));
-    
+
     Get.find<AuthController>();
-    
+
     Get.lazyPut(
       () => CategoriesController(
         getCategories: Get.find<GetCategories>(),

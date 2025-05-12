@@ -5,10 +5,7 @@ import 'package:service_booking_app/presentation/controllers/category_form_contr
 class CategoryFormFields extends StatelessWidget {
   final CategoryFormController controller;
 
-  const CategoryFormFields({
-    super.key,
-    required this.controller,
-  });
+  const CategoryFormFields({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -23,11 +20,12 @@ class CategoryFormFields extends StatelessWidget {
             prefixIcon: const Icon(Icons.label),
             border: const OutlineInputBorder(),
           ),
-          validator: (value) => controller.validateNotEmpty(value, 'category_name'.tr),
+          validator:
+              (value) => controller.validateNotEmpty(value, 'category_name'.tr),
           textInputAction: TextInputAction.next,
         ),
         const SizedBox(height: 16),
-        
+
         // Category description
         TextFormField(
           controller: controller.descriptionController,
@@ -39,7 +37,9 @@ class CategoryFormFields extends StatelessWidget {
             alignLabelWithHint: true,
           ),
           maxLines: 5,
-          validator: (value) => controller.validateNotEmpty(value, 'category_description'.tr),
+          validator:
+              (value) =>
+                  controller.validateNotEmpty(value, 'category_description'.tr),
         ),
       ],
     );

@@ -33,15 +33,15 @@ class ServiceFormPage extends GetView<ServiceFormController> {
                 // Image selection
                 ImagePickerSection(controller: controller),
                 const SizedBox(height: 24),
-                
+
                 // Form fields
                 ServiceFormFields(controller: controller),
                 const SizedBox(height: 16),
-                
+
                 // Availability toggle
                 AvailabilityToggle(controller: controller),
                 const SizedBox(height: 32),
-                
+
                 // Form buttons
                 ServiceFormButtons(
                   controller: controller,

@@ -8,15 +8,13 @@ class SplashBinding extends Bindings {
   @override
   void dependencies() {
     Get.find<AuthController>();
-    
+
     Get.lazyPut(() => LanguageController(), fenix: true);
-    
+
     Get.lazyPut(() => ThemeController(), fenix: true);
-    
+
     Get.lazyPut(
-      () => SplashController(
-        authController: Get.find<AuthController>(),
-      ),
+      () => SplashController(authController: Get.find<AuthController>()),
     );
   }
 }

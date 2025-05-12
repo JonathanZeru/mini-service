@@ -9,7 +9,11 @@ class UpdateService {
 
   UpdateService(this.repository);
 
-  Future<Either<Failure, ServiceModel>> call(String id, ServiceModel service, {File? imageFile}) async {
+  Future<Either<Failure, ServiceModel>> call(
+    String id,
+    ServiceModel service, {
+    File? imageFile,
+  }) async {
     return await repository.updateService(id, service, imageFile);
   }
 }

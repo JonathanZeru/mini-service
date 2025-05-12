@@ -30,11 +30,9 @@ class HomeView extends GetView<HomeController> {
           children: [
             // Search and filter section
             SearchFilterSection(controller: controller),
-            
+
             // Services list
-            Expanded(
-              child: ServicesList(controller: controller),
-            ),
+            Expanded(child: ServicesList(controller: controller)),
           ],
         ),
       ),

@@ -76,15 +76,15 @@ class CategoryController extends GetxController {
 
   void goToEditCategory() {
     if (category.value != null) {
-      Get.toNamed(
-        Routes.editCategory,
-        arguments: category.value!.id,
-      );
+      Get.toNamed(Routes.editCategory, arguments: category.value!.id);
     }
   }
 
   void goToCreateService() {
-    Get.toNamed(Routes.createService, arguments: {'preselectedCategoryId': category.value?.id});
+    Get.toNamed(
+      Routes.createService,
+      arguments: {'preselectedCategoryId': category.value?.id},
+    );
   }
 
   void goToServiceDetails(String id) {
@@ -102,7 +102,7 @@ class CategoryController extends GetxController {
 
   Future<void> performDelete() async {
     if (category.value?.id == null) return;
-    
+
     isDeleting.value = true;
     final result = await deleteCategory(category.value!.id!);
     result.fold(
@@ -119,14 +119,14 @@ class CategoryController extends GetxController {
           message: 'category_deleted'.tr,
           isError: false,
         );
-          try {
-            final homeController = Get.find<HomeController>();
-            homeController.fetchCategories().then((_) {
-              Get.until((route) => route.settings.name == Routes.home);
-            });
-          } catch (e) {
+        try {
+          final homeController = Get.find<HomeController>();
+          homeController.fetchCategories().then((_) {
             Get.until((route) => route.settings.name == Routes.home);
-          }
+          });
+        } catch (e) {
+          Get.until((route) => route.settings.name == Routes.home);
+        }
       },
     );
     isDeleting.value = false;

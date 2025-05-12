@@ -47,10 +47,7 @@ class AppPages {
     GetPage(
       name: Routes.home,
       page: () => const MainLayoutPage(),
-  bindings: [
-    AuthBinding(),
-    HomeBinding(),
-  ],
+      bindings: [AuthBinding(), HomeBinding()],
       transition: Transition.fadeIn,
     ),
     GetPage(
@@ -88,6 +85,6 @@ class AppPages {
       page: () => CategoryFormPage(isEditing: true),
       binding: CategoryFormBinding(),
       transition: Transition.rightToLeft,
-    )
+    ),
   ];
 }

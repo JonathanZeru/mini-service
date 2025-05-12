@@ -8,10 +8,7 @@ import 'package:service_booking_app/presentation/widgets/theme_dialog.dart';
 class AppSettingsSection extends StatelessWidget {
   final SettingsController controller;
 
-  const AppSettingsSection({
-    super.key,
-    required this.controller,
-  });
+  const AppSettingsSection({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -20,9 +17,9 @@ class AppSettingsSection extends StatelessWidget {
       children: [
         Text(
           'app_settings'.tr,
-          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-            fontWeight: FontWeight.bold,
-          ),
+          style: Theme.of(
+            context,
+          ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 8),
         Card(
@@ -32,23 +29,24 @@ class AppSettingsSection extends StatelessWidget {
               SettingsTile(
                 title: 'language'.tr,
                 icon: Icons.language,
-                trailing: Obx(() => Text(
-                  controller.languageController.getLanguageName(
-                    controller.languageController.currentLanguage.value,
+                trailing: Obx(
+                  () => Text(
+                    controller.languageController.getLanguageName(
+                      controller.languageController.currentLanguage.value,
+                    ),
+                    style: Theme.of(context).textTheme.bodyMedium,
                   ),
-                  style: Theme.of(context).textTheme.bodyMedium,
-                )),
+                ),
                 onTap: () {
                   showDialog(
                     context: context,
-                    builder: (context) => LanguageDialog(
-                      controller: controller,
-                    ),
+                    builder:
+                        (context) => LanguageDialog(controller: controller),
                   );
                 },
               ),
               const Divider(height: 1),
-              
+
               // Theme settings
               SettingsTile(
                 title: 'theme'.tr,
@@ -73,14 +71,12 @@ class AppSettingsSection extends StatelessWidget {
                 onTap: () {
                   showDialog(
                     context: context,
-                    builder: (context) => ThemeDialog(
-                      controller: controller,
-                    ),
+                    builder: (context) => ThemeDialog(controller: controller),
                   );
                 },
               ),
               const Divider(height: 1),
-              
+
               // Notifications
               SettingsTile(
                 title: 'notifications'.tr,
