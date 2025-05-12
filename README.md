@@ -1,6 +1,6 @@
 # Mini Service Booking App (Frontend Only)
 
-A Flutter app that allows users to manage a list of services with full CRUD functionality using a public REST API. Built with GetX for state management and follows Clean Architecture principles.
+A Flutter app that allows users to manage a list of services and categories with full CRUD functionality using a public REST API. Built with GetX for state management and follows Clean Architecture principles.
 
 ## Features
 
@@ -10,16 +10,34 @@ A Flutter app that allows users to manage a list of services with full CRUD func
 - Add new service
 - Edit existing service
 - Delete service
+- View a list of categories
+- View categories details
+- Add new categories
+- Edit existing categories
+- Delete categories
 
 ### Service Model
 Each service includes:
 - `name` – String
-- `category` – String
+- `categoryId` – String
 - `price` – double
 - `imageUrl` – String
 - `availability` – boolean
 - `duration` – int (minutes)
 - `rating` – double (1.0 to 5.0)
+
+### Category Model
+Each service includes:
+- `name` – String
+- `description` – String
+
+### User Model
+Each service includes:
+- `username` – String
+- `email` – String
+- `avatarUrl` – String
+- `phoneNumber` – String
+- `isAdmin` – String
 
 ### Architecture
 - Follows **Clean Architecture**:
@@ -32,7 +50,7 @@ Each service includes:
   - Bindings and Dependency Injection
 
 ### API
-- Consumes public REST API from [MockAPI](https://mockapi.io/) (or [crudcrud.com](https://crudcrud.com/))
+- Consumes public REST API from [MockAPI](https://mockapi.io/)
 
 ### UI/UX Highlights
 - Clean and intuitive interface
