@@ -80,31 +80,21 @@ lib/
 
 │   │   └── failures.dart     # Failure classes
 
-│   │
-
 │   ├── local/                # Local storage
 
 │   │   └── hive_manager.dart # Hive database manager
-
-│   │
 
 │   ├── network/              # Network layer
 
 │   │   └── api_provider.dart # API communication
 
-│   │
-
 │   ├── theme/                # Theme configuration
 
 │   │   └── app_theme.dart    # Light/dark themes
 
-│   │
-
 │   ├── translations/         # Internationalization
 
 │   │   └── app_translations.dart # Language files
-
-│   │
 
 │   └── utils/                # Utilities and helpers
 
@@ -112,15 +102,11 @@ lib/
 
 │       └── ui_helpers.dart   # UI utilities
 
-│
-
 ├── data/                     # Data layer implementation
 
 │   ├── models/               # Data models (DTOs)
 
 │   └── repositories/         # Repository implementations
-
-│
 
 ├── domain/                   # Business logic layer
 
@@ -132,25 +118,17 @@ lib/
 
 │       ├── category/         # Category use cases
 
-│       └── service/          # Service use cases
-
-│
+│       └── service/          # Service use cases│
 
 └── presentation/             # UI layer
 
     ├── bindings/             # Dependency bindings
 
-    │
-
     ├── controllers/          # State controllers
-
-    │
 
     ├── pages/                # Application screens
 
     │   ├── auth/             # Authentication screens
-
-    │   │
 
     │   ├── categories/       # Category management
 
@@ -166,15 +144,11 @@ lib/
 
     │   │   └── category_form_page.dart
 
-    │   │
-
     │   ├── home/             # Home screen
 
     │   │   ├── widgets/      # Home widgets
 
     │   │   └── home_view.dart
-
-    │   │
 
     │   ├── service/          # Service management
 
@@ -188,27 +162,19 @@ lib/
 
     │   │   └── service_form_page.dart
 
-    │   │
-
     │   ├── settings/         # App settings
 
     │   │   ├── widgets/      # Settings widgets
 
     │   │   └── settings_view.dart
 
-    │   │
-
     │   ├── splash/           # Splash screen
 
     │   │   └── splash_page.dart
 
-    │   │
-
     │   ├── main_layout.dart  # Main app scaffold
 
     │   └── splash.dart       # Splash screen entry
-
-    │
 
     ├── routes/               # Navigation configuration
 
@@ -216,7 +182,4 @@ lib/
 
     │   └── app_routes.dart   # Route names
 
-    │
-
     └── widgets/              # Reusable UI components
-    
