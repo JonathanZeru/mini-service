@@ -5,21 +5,19 @@ import 'package:service_booking_app/data/repositories/categories_repository_impl
 import 'package:service_booking_app/data/repositories/services_repository_impl.dart';
 import 'package:service_booking_app/domain/repositories/categories_repository.dart';
 import 'package:service_booking_app/domain/repositories/services_repository.dart';
-import 'package:service_booking_app/domain/usecases/create_service.dart';
-import 'package:service_booking_app/domain/usecases/get_categories.dart';
-import 'package:service_booking_app/domain/usecases/get_service.dart';
-import 'package:service_booking_app/domain/usecases/update_service.dart';
+import 'package:service_booking_app/domain/usecases/service/create_service.dart';
+import 'package:service_booking_app/domain/usecases/category/get_categories.dart';
+import 'package:service_booking_app/domain/usecases/service/get_service.dart';
+import 'package:service_booking_app/domain/usecases/service/update_service.dart';
 import 'package:service_booking_app/presentation/controllers/service_form_controller.dart';
 
 class ServiceFormBinding extends Bindings {
   @override
   void dependencies() {
-    // Reuse the API provider if it exists
     if (!Get.isRegistered<ApiProvider>()) {
       Get.lazyPut(() => ApiProvider(baseUrl: Constants.apiBaseUrl));
     }
     
-    // Reuse the services repository if it exists
     if (!Get.isRegistered<ServicesRepository>()) {
       Get.lazyPut<ServicesRepository>(
         () => ServicesRepositoryImpl(
@@ -30,7 +28,6 @@ class ServiceFormBinding extends Bindings {
       );
     }
     
-    // Reuse the categories repository if it exists
     if (!Get.isRegistered<CategoriesRepository>()) {
       Get.lazyPut<CategoriesRepository>(
         () => CategoriesRepositoryImpl(

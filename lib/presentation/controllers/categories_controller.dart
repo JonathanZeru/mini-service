@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
 import 'package:service_booking_app/core/utils/ui_helpers.dart';
 import 'package:service_booking_app/data/models/category_model.dart';
-import 'package:service_booking_app/domain/usecases/delete_category.dart';
-import 'package:service_booking_app/domain/usecases/get_categories.dart';
+import 'package:service_booking_app/domain/usecases/category/delete_category.dart';
+import 'package:service_booking_app/domain/usecases/category/get_categories.dart';
 import 'package:service_booking_app/presentation/controllers/auth_controller.dart';
 import 'package:service_booking_app/presentation/routes/app_routes.dart';
 

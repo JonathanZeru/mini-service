@@ -1,11 +1,11 @@
 import 'package:get/get.dart';
 import 'package:service_booking_app/core/utils/ui_helpers.dart';
 import 'package:service_booking_app/data/models/user_model.dart';
-import 'package:service_booking_app/domain/usecases/get_current_user.dart';
-import 'package:service_booking_app/domain/usecases/is_logged_in.dart';
-import 'package:service_booking_app/domain/usecases/login.dart';
-import 'package:service_booking_app/domain/usecases/logout.dart';
-import 'package:service_booking_app/domain/usecases/register.dart';
+import 'package:service_booking_app/domain/usecases/auth/get_current_user.dart';
+import 'package:service_booking_app/domain/usecases/auth/is_logged_in.dart';
+import 'package:service_booking_app/domain/usecases/auth/login.dart';
+import 'package:service_booking_app/domain/usecases/auth/logout.dart';
+import 'package:service_booking_app/domain/usecases/auth/register.dart';
 import 'package:service_booking_app/presentation/routes/app_routes.dart';
 
 class AuthController extends GetxController {
@@ -96,7 +96,6 @@ Future<bool> checkAuthStatus() async {
           message: 'login_success'.tr,
           isError: false,
         );
-      // Add this to ensure controllers are ready
       Get.put(AuthController(
         login: Get.find<Login>(),
         register: Get.find<Register>(),
@@ -105,7 +104,6 @@ Future<bool> checkAuthStatus() async {
         isLoggedIn: Get.find<IsLoggedIn>(),
       ), permanent: true);
 
-      // Navigate after a small delay to ensure state is updated
       Future.delayed(Duration.zero, () {
         Get.offAllNamed(Routes.home);
       });

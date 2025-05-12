@@ -2,9 +2,9 @@ import 'package:get/get.dart';
 import 'package:service_booking_app/core/utils/ui_helpers.dart';
 import 'package:service_booking_app/data/models/category_model.dart';
 import 'package:service_booking_app/data/models/service_model.dart';
-import 'package:service_booking_app/domain/usecases/delete_category.dart';
-import 'package:service_booking_app/domain/usecases/get_categories.dart';
-import 'package:service_booking_app/domain/usecases/get_services.dart';
+import 'package:service_booking_app/domain/usecases/category/delete_category.dart';
+import 'package:service_booking_app/domain/usecases/category/get_categories.dart';
+import 'package:service_booking_app/domain/usecases/service/get_services.dart';
 import 'package:service_booking_app/presentation/controllers/auth_controller.dart';
 import 'package:service_booking_app/presentation/routes/app_routes.dart';
 
@@ -67,7 +67,6 @@ class HomeController extends GetxController {
     currentIndex.value = index;
   }
 
-  // Services methods
   // Services methods
   Future<void> fetchServices({bool refresh = true}) async {
     if (refresh) {
@@ -185,19 +184,16 @@ class HomeController extends GetxController {
 
 void resetFilters() {
   searchQuery.value = '';
-  selectedCategoryId.value = null; // Changed from 'All' to null
+  selectedCategoryId.value = null; 
   filterAvailableOnly.value = false;
   selectedMinPrice.value = minPrice.value;
   selectedMaxPrice.value = maxPrice.value;
   selectedRating.value = 0.0;
   
-  // Optional: refresh services from API if needed
   fetchServices(refresh: true);
   
-  // Apply the filters immediately
   filterServices();
 }
-  // Update the category selection method
   void updateSelectedCategory(String? categoryId) {
     selectedCategoryId.value = categoryId;
     filterServices();
@@ -225,7 +221,6 @@ void resetFilters() {
     fetchServices();
   }
 
-  // Categories methods
   // Categories methods
   Future<void> fetchCategories({bool refresh = true}) async {
     if (refresh) {

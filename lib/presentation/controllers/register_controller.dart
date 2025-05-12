@@ -144,8 +144,6 @@ class RegisterController extends GetxController {
   }
 
   void goToLogin() {
-    // Use offAndToNamed instead of toNamed to replace the current screen
-    // This ensures proper navigation and controller lifecycle management
     Get.offAndToNamed(Routes.login);
   }
 }

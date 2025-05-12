@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:service_booking_app/core/utils/ui_helpers.dart';
 import 'package:service_booking_app/data/models/category_model.dart';
-import 'package:service_booking_app/domain/usecases/create_category.dart';
-import 'package:service_booking_app/domain/usecases/get_category.dart';
-import 'package:service_booking_app/domain/usecases/update_category.dart';
+import 'package:service_booking_app/domain/usecases/category/create_category.dart';
+import 'package:service_booking_app/domain/usecases/category/get_category.dart';
+import 'package:service_booking_app/domain/usecases/category/update_category.dart';
 import 'package:service_booking_app/presentation/controllers/home_controller.dart';
 import 'package:service_booking_app/presentation/routes/app_routes.dart';
 
@@ -26,7 +26,6 @@ class CategoryFormController extends GetxController {
   final RxBool isLoading = false.obs;
   final RxBool isSaving = false.obs;
   
-  // Add this for form validation tracking
   final RxBool _isFormValid = false.obs;
   bool get isFormValid => _isFormValid.value;
 
@@ -41,18 +40,15 @@ class CategoryFormController extends GetxController {
       loadCategory();
     }
     
-    // Add listeners to text controllers
     nameController.addListener(checkFormValidity);
     descriptionController.addListener(checkFormValidity);
   }
 
-  // Add this method to validate the form
   void validateForm() {
     final formValid = formKey.currentState?.validate() ?? false;
     _isFormValid.value = formValid;
   }
 
-  // Call this method whenever form fields change
   void checkFormValidity() {
     validateForm();
   }
@@ -73,7 +69,6 @@ class CategoryFormController extends GetxController {
       (data) {
         nameController.text = data.name;
         descriptionController.text = data.description;
-        // Check form validity after loading data
         checkFormValidity();
       },
     );
@@ -145,7 +140,6 @@ class CategoryFormController extends GetxController {
 
   @override
   void onClose() {
-    // Remove listeners to prevent memory leaks
     nameController.removeListener(checkFormValidity);
     descriptionController.removeListener(checkFormValidity);
     

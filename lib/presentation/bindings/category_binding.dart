@@ -5,20 +5,18 @@ import 'package:service_booking_app/data/repositories/categories_repository_impl
 import 'package:service_booking_app/data/repositories/services_repository_impl.dart';
 import 'package:service_booking_app/domain/repositories/categories_repository.dart';
 import 'package:service_booking_app/domain/repositories/services_repository.dart';
-import 'package:service_booking_app/domain/usecases/delete_category.dart';
-import 'package:service_booking_app/domain/usecases/get_category.dart';
-import 'package:service_booking_app/domain/usecases/get_services.dart';
+import 'package:service_booking_app/domain/usecases/category/delete_category.dart';
+import 'package:service_booking_app/domain/usecases/category/get_category.dart';
+import 'package:service_booking_app/domain/usecases/service/get_services.dart';
 import 'package:service_booking_app/presentation/controllers/auth_controller.dart';
 import 'package:service_booking_app/presentation/controllers/category_controller.dart';
 class CategoryBinding extends Bindings {
   @override
   void dependencies() {
-    // Reuse the API provider if it exists
     if (!Get.isRegistered<ApiProvider>()) {
       Get.lazyPut(() => ApiProvider(baseUrl: Constants.apiBaseUrl));
     }
     
-    // Reuse the repository if it exists
     if (!Get.isRegistered<CategoriesRepository>()) {
       Get.lazyPut<CategoriesRepository>(
         () => CategoriesRepositoryImpl(
@@ -28,7 +26,6 @@ class CategoryBinding extends Bindings {
       );
     }
     
-    // Services repository for fetching services by category
     if (!Get.isRegistered<ServicesRepository>()) {
       Get.lazyPut<ServicesRepository>(
         () => ServicesRepositoryImpl(
@@ -43,7 +40,6 @@ class CategoryBinding extends Bindings {
     Get.lazyPut(() => DeleteCategory(Get.find<CategoriesRepository>()));
     Get.lazyPut(() => GetServices(Get.find<ServicesRepository>()));
     
-    // Make sure AuthController is available
     Get.find<AuthController>();
     
     Get.lazyPut(

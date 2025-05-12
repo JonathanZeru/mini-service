@@ -7,7 +7,6 @@ import 'package:service_booking_app/presentation/controllers/theme_controller.da
 class SettingsBinding extends Bindings {
   @override
   void dependencies() {
-    // Make sure controllers are initialized
     Get.find<AuthController>();
     Get.find<LanguageController>();
     Get.find<ThemeController>();

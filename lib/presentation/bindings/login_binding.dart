@@ -6,10 +6,8 @@ import 'package:service_booking_app/presentation/controllers/language_controller
 class LoginBinding extends Bindings {
   @override
   void dependencies() {
-    // Make sure AuthBinding is initialized
     Get.find<AuthController>();
     
-    // Make sure LanguageController is available
     if (!Get.isRegistered<LanguageController>()) {
       Get.put(LanguageController(), permanent: true);
     }

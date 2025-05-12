@@ -5,10 +5,10 @@ import 'package:image_picker/image_picker.dart';
 import 'package:service_booking_app/core/utils/ui_helpers.dart';
 import 'package:service_booking_app/data/models/category_model.dart';
 import 'package:service_booking_app/data/models/service_model.dart';
-import 'package:service_booking_app/domain/usecases/create_service.dart';
-import 'package:service_booking_app/domain/usecases/get_categories.dart';
-import 'package:service_booking_app/domain/usecases/get_service.dart';
-import 'package:service_booking_app/domain/usecases/update_service.dart';
+import 'package:service_booking_app/domain/usecases/service/create_service.dart';
+import 'package:service_booking_app/domain/usecases/category/get_categories.dart';
+import 'package:service_booking_app/domain/usecases/service/get_service.dart';
+import 'package:service_booking_app/domain/usecases/service/update_service.dart';
 import 'package:service_booking_app/presentation/controllers/home_controller.dart';
 import 'package:service_booking_app/presentation/routes/app_routes.dart';
 
@@ -41,14 +41,10 @@ class ServiceFormController extends GetxController {
 
   String? serviceId;
   bool get isEditing => serviceId != null;
-// Add these to your ServiceFormController
-// final RxBool _isFormValid = false.obs;
-// bool get isFormValid => _isFormValid.value;
-// Add these properties to your ServiceFormController class
+
 final RxBool _isFormValid = false.obs;
 bool get isFormValid => _isFormValid.value;
 
-// Add this method to validate the entire form
 void validateForm() {
   final formValid = formKey.currentState?.validate() ?? false;
   final categoryValid = selectedCategory.value != null;
@@ -56,7 +52,6 @@ void validateForm() {
   _isFormValid.value = formValid && categoryValid && imageValid;
 }
 
-// Call this method whenever form fields change
 void checkFormValidity() {
   validateForm();
 }
@@ -96,39 +91,6 @@ void onClose() {
   ratingController.dispose();
   super.onClose();
 }
-
-
-// void validateForm() {
-//   final formValid = formKey.currentState?.validate() ?? false;
-//   final categoryValid = selectedCategory.value != null;
-//   final imageValid = imageFile.value != null || imageUrl.value.isNotEmpty;
-//   _isFormValid.value = formValid && categoryValid && imageValid;
-// }
-
-// Call this method whenever form fields change
-// void checkFormValidity() {
-//   validateForm();
-// }
-//   @override
-//   void onInit() {
-//     super.onInit();
-//     fetchCategories();
-//     if (Get.arguments != null) {
-//       serviceId = Get.arguments as String;
-//       loadService();
-//     }
-//     // Add listeners to all text controllers
-//   nameController.addListener(checkFormValidity);
-//   priceController.addListener(checkFormValidity);
-//   durationController.addListener(checkFormValidity);
-//   ratingController.addListener(checkFormValidity);
-  
-//   // Add reaction to category and image changes
-//   ever(selectedCategory, (_) => checkFormValidity());
-//   ever(imageFile, (_) => checkFormValidity());
-//   ever(imageUrl, (_) => checkFormValidity());
-//   }
-
 
   Future<void> fetchCategories() async {
     isLoading.value = true;
@@ -315,7 +277,7 @@ void onClose() {
         name: nameController.text.trim(),
         categoryId: selectedCategory.value!.id!,
         price: double.parse(priceController.text.trim()),
-        imageUrl: imageUrl.value, // This will be updated if a new image is uploaded
+        imageUrl: imageUrl.value,
         availability: availability.value,
         duration: int.parse(durationController.text.trim()),
         rating: double.parse(ratingController.text.trim()),
@@ -358,17 +320,4 @@ void onClose() {
     }
   }
 
-  // @override
-  // void onClose() {
-  //   nameController.removeListener(checkFormValidity);
-  // priceController.removeListener(checkFormValidity);
-  // durationController.removeListener(checkFormValidity);
-  // ratingController.removeListener(checkFormValidity);
-  // nameController.dispose();
-  // priceController.dispose();
-  // durationController.dispose();
-  // ratingController.dispose();
-  // super.onClose();
-
-  // }
 }

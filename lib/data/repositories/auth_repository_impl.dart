@@ -13,7 +13,6 @@ class AuthRepositoryImpl implements AuthRepository {
       await Future.delayed(const Duration(seconds: 1));
       
       // For demo purposes, accept any username/password combination
-      // In a real app, you would validate against a backend
       if (username.isEmpty || password.isEmpty) {
         return Left(BadRequestFailure(message: 'Username and password are required'));
       }

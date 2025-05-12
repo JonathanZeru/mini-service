@@ -31,7 +31,6 @@ class ThemeController extends GetxController {
     Get.changeThemeMode(mode);
     HiveManager.saveThemeMode(_themeModeToString(mode));
     
-    // Update status bar and navigation bar colors
     AppTheme.updateSystemUIOverlayStyle(mode);
   }
 

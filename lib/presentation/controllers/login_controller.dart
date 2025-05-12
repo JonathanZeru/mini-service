@@ -93,13 +93,10 @@ class LoginController extends GetxController {
   }
 
   void goToRegister() {
-    // Use offAndToNamed instead of toNamed to replace the current screen
-    // This ensures proper navigation and controller lifecycle management
     Get.offAndToNamed(Routes.register);
   }
 
   void goToForgotPassword() {
-    // Implement forgot password functionality
     Get.snackbar(
       'info'.tr,
       'This feature is not implemented yet'.tr,

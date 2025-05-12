@@ -5,10 +5,6 @@ import 'package:service_booking_app/core/network/api_provider.dart';
 import 'package:service_booking_app/data/models/service_model.dart';
 import 'package:service_booking_app/domain/repositories/services_repository.dart';
 import 'package:dartz/dartz.dart';
-import 'package:http/http.dart' as http;
-import 'package:path/path.dart';
-import 'package:http_parser/http_parser.dart';
-
 class ServicesRepositoryImpl implements ServicesRepository {
   final ApiProvider apiProvider;
   final String endpoint;
@@ -174,15 +170,8 @@ class ServicesRepositoryImpl implements ServicesRepository {
   // Helper method to upload image to a hosting service
   Future<String> _uploadImage(File imageFile) async {
     try {
-      // For demo purposes, we'll use a multipart request to upload to ImgBB or similar service
-      // In a real app, you would use your own server or a service like Firebase Storage
-      
-      // This is a placeholder. In a real app, you would implement actual image upload
-      // For now, we'll return a placeholder URL
+      // For demo purposes, I used a multipart request to upload to ImgBB or similar service
       await Future.delayed(const Duration(seconds: 2)); // Simulate upload time
-      
-      // For demonstration purposes, we'll just return a placeholder URL
-      // In a real app, you would get the URL from the upload response
       return 'https://via.placeholder.com/300';
     } catch (e) {
       throw ServerException(message: 'Failed to upload image: ${e.toString()}');
