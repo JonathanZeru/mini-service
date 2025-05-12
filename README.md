@@ -69,78 +69,154 @@ Each service includes:
 ## Folder Structure
 
 lib/
+
 │
+
 ├── core/                     # Core application infrastructure
+
 │   ├── errors/               # Custom exceptions and failures
+
 │   │   ├── exceptions.dart   # Application exceptions
+
 │   │   └── failures.dart     # Failure classes
+
 │   │
+
 │   ├── local/                # Local storage
+
 │   │   └── hive_manager.dart # Hive database manager
+
 │   │
+
 │   ├── network/              # Network layer
+
 │   │   └── api_provider.dart # API communication
+
 │   │
+
 │   ├── theme/                # Theme configuration
+
 │   │   └── app_theme.dart    # Light/dark themes
+
 │   │
+
 │   ├── translations/         # Internationalization
+
 │   │   └── app_translations.dart # Language files
+
 │   │
+
 │   └── utils/                # Utilities and helpers
+
 │       ├── constants.dart    # App constants
+
 │       └── ui_helpers.dart   # UI utilities
+
 │
+
 ├── data/                     # Data layer implementation
+
 │   ├── models/               # Data models (DTOs)
+
 │   └── repositories/         # Repository implementations
+
 │
+
 ├── domain/                   # Business logic layer
+
 │   ├── repositories/         # Repository contracts
+
 │   └── usecases/             # Business use cases
+
 │       ├── auth/             # Authentication use cases
+
 │       ├── category/         # Category use cases
+
 │       └── service/          # Service use cases
+
 │
+
 └── presentation/             # UI layer
+
     ├── bindings/             # Dependency bindings
+
     │
+
     ├── controllers/          # State controllers
+
     │
+
     ├── pages/                # Application screens
+
     │   ├── auth/             # Authentication screens
+
     │   │
+
     │   ├── categories/       # Category management
+
     │   │   ├── widgets/      # Category widgets
+
     │   │   │   ├── category_detail/  # Detail view components
+
     │   │   │   └── category_form/    # Form components
+
     │   │   ├── categories_view.dart
+
     │   │   ├── category_details_page.dart
+
     │   │   └── category_form_page.dart
+
     │   │
+
     │   ├── home/             # Home screen
+
     │   │   ├── widgets/      # Home widgets
+
     │   │   └── home_view.dart
+
     │   │
+
     │   ├── service/          # Service management
+
     │   │   ├── widgets/      # Service widgets
+
     │   │   │   ├── service_detail/  # Detail view components
+
     │   │   │   └── service_form/    # Form components
+
     │   │   ├── service_details_page.dart
+
     │   │   └── service_form_page.dart
+
     │   │
+
     │   ├── settings/         # App settings
+
     │   │   ├── widgets/      # Settings widgets
+
     │   │   └── settings_view.dart
+
     │   │
+
     │   ├── splash/           # Splash screen
+
     │   │   └── splash_page.dart
+
     │   │
+
     │   ├── main_layout.dart  # Main app scaffold
+
     │   └── splash.dart       # Splash screen entry
+
     │
+
     ├── routes/               # Navigation configuration
+
     │   ├── app_pages.dart    # Page definitions
+
     │   └── app_routes.dart   # Route names
+
     │
+
     └── widgets/              # Reusable UI components
+    
